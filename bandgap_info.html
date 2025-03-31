@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment Information</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('bg1.png') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            margin: 20px;
+        
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        h1 {
+            color: black;
+            font-size: 60px;
+            font-weight: bold;
+            text-align: center;
+            font-family: 'Raleway', sans-serif;
+            text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            color: #33007f;
+            font-size: 28px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #240279;
+            padding-bottom: 5px;
+        }
+        p, ol {
+            font-size: 20px;
+            color: #333;
+            line-height: 1.8;
+        }
+        ol {
+            padding-left: 25px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #1c027a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background: #0056b3;
+        }
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .image-container img {
+            max-width: 60%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>EXPERIMENT NO. 11 - ENERGY BAND GAP</h1>
+        <div class="card">
+            <h2>AIM - APPARATUS - PRIOR CONCEPTS</h2>
+            <p><strong>Aim:</strong> To determine the forbidden energy gap of a given semiconductor.</p>
+            <p><strong>Apparatus:</strong> P.N junction diode, sand or oil bath, thermometer (100°C), micro-ammeter (50 µA), 1.5V D. C. supply, heating coil, etc.</p>
+            <p><strong>Prior Concepts:</strong> Semiconductor energy band structure, forbidden energy gap, Ohm's law, PN junction diode.</p>
+        </div>
+        <div class="card">
+            <h2>THEORY</h2>
+            <p>A single isolated atom is characterized by discrete energy levels. In solids, consisting of an aggregate of atoms, the individual energy levels are so close together that they can be considered to be continuous. This series of energy levels form a band.</p>
+            <p><strong>Valence Band:</strong> The band formed by a series of energy levels containing the valence electrons. It may be partially filled or completely filled, depending on the nature of the solid.</p>
+            <p><strong>Conduction Band:</strong> The next higher permitted energy band is the conduction band. Electrons in this band can move freely.</p>
+            <p><strong>Forbidden Band:</strong> The valence band & conduction band are separated by a gap called the forbidden band where no electrons exist.</p>
+        </div>
+        <div class="image-container">
+            <img src="circuit.jpeg" alt="Circuit Diagram">
+        </div>
+        <div class="card">
+            <h2>PROCEDURE</h2>
+            <ol>
+                <li>Take white stone powder in the oven filling it to one-fourth of its capacity. Keep the diode and thermometer in the oven.</li>
+                <li>Connect the circuit as shown.</li>
+                <li>Start heating the oven. As the temperature of the diode starts increasing, the leakage current will also increase.</li>
+                <li>Allow the oven to cool and record the readings.</li>
+                <li>Calculate resistance using Ohm's law.</li>
+                <li>Plot a graph of log<sub>10</sub>(R) vs 1/T.</li>
+                <li>Find the slope and calculate β.</li>
+                <li>Determine the energy gap, E<sub>g</sub> using E<sub>g</sub> = 2k<sub>B</sub>β.</li>
+            </ol>
+        </div>
+        <div class="card">
+            <h2>IMPORTANT FORMULAS</h2>
+            <p><strong>Resistance (R):</strong> R = V / I</p>
+            <p><strong>Log of Resistance:</strong> log<sub>10</sub>(R)</p>
+            <p><strong>Reciprocal of Temperature:</strong> 1/T</p>
+            <p><strong>Activation Energy (E<sub>g</sub>):</strong> E<sub>g</sub> = 2 × k<sub>B</sub> × β</p>
+        </div>
+        <div class="card">
+            <h2>NAVIGATE</h2>
+            <a href="bandgap_cal.html">Go to Experiment Analysis</a>
+            <a href="Exp_list.html" style="margin-left: 10px;">Go to Experiment list</a>
+        </div>
+    </div>
+</body>
+</html>
