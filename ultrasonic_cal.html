@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment Ultrasonic Interferometer</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center;
+            background-color: #AEC6CF; /* Pastel Blue */
+            margin: 0;
+            overflow: hidden;
+        }
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; border: 3px solid black; }
+        th, td { border: 3px solid black; padding: 5px; text-align: center; }
+        th {
+            background: linear-gradient(to bottom, #FFC0CB, #FFE6EB); /* Lighter pink shading with 3D effect */
+            box-shadow: inset 0px -2px 4px rgba(0,0,0,0.2), inset 0px 2px 4px rgba(255,255,255,0.5);
+        }
+        input { width: 80px; }
+        h2 {
+            font-weight: bold;
+            font-size: 50px; /* Increased size */
+            font-family: 'Georgia', serif;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            color: #003366;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+            font-size: 18px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <video id="video-background" autoplay muted loop>
+        <source src="https://www.videvo.net/videvo_files/converted/2014_12/preview/Physics_Experiment_Nov14_51_Videvo.mov61326.webm" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+    
+    <h2>Experiment Ultrasonic Interferometer</h2>
+    
+    <label>Total divisions on circular scale:</label>
+    <input type="number" id="totalDivisions" placeholder="-" oninput="checkInput()"><br>
+    
+    <label>Smallest division on main scale:</label>
+    <input type="number" id="smallestDivision" placeholder="-" oninput="checkInput()"><br>
+    
+    <button onclick="calculateLeastCount()">Calculate Least Count</button>
+    <p>Least Count: <span id="leastCount">-</span></p>
+    
+    <h3>Observation Table</h3>
+    <table id="observationTable">
+        <tr>
+            <th>MSR (mm)</th>
+            <th>CSD</th>
+            <th>TR = MSR + LC * CSD</th>
+            <th>λ/2</th>
+        </tr>
+    </table>
+    <button onclick="addRow()">Add Observation</button>
+    <button onclick="calculateTRAndLambda()">Result</button>
+    
+    <h3>Results</h3>
+    <p>Mean λ/2: <span id="meanLambda">-</span></p>
+    <p>Ultrasonic Velocity: <span id="velocity">-</span> m/s</p>
+    <p>Compressibility: <span id="compressibility">-</span> Pa⁻¹</p>
+    
+    <script>
+        let leastCount = 0;
+        
+        function checkInput() {
+            let totalDiv = document.getElementById("totalDivisions").value;
+            let smallestDiv = document.getElementById("smallestDivision").value;
+            document.getElementById("leastCount").innerText = (totalDiv && smallestDiv) ? "0" : "-";
+        }
+
+        function calculateLeastCount() {
+            let totalDiv = parseFloat(document.getElementById("totalDivisions").value);
+            let smallestDiv = parseFloat(document.getElementById("smallestDivision").value);
+            if (!totalDiv || !smallestDiv) return;
+            leastCount = smallestDiv / totalDiv;
+            document.getElementById("leastCount").innerText = leastCount.toFixed(6);
+        }
+        
+        function addRow() {
+            let table = document.getElementById("observationTable");
+            let row = table.insertRow();
+            
+            let msrCell = row.insertCell(0);
+            let csdCell = row.insertCell(1);
+            let trCell = row.insertCell(2);
+            let lambdaCell = row.insertCell(3);
+            
+            msrCell.innerHTML = `<input type='number' class='msr'>`;
+            csdCell.innerHTML = `<input type='number' class='csd'>`;
+            trCell.innerText = "-";
+            lambdaCell.innerText = "-";
+        }
+        
+        function calculateTRAndLambda() {
+            let msrInputs = document.querySelectorAll(".msr");
+            let csdInputs = document.querySelectorAll(".csd");
+            let trValues = [];
+            
+            let allInputsFilled = Array.from(msrInputs).every(input => input.value) && Array.from(csdInputs).every(input => input.value);
+            if (!allInputsFilled || leastCount === 0) return;
+            
+            for (let i = 0; i < msrInputs.length; i++) {
+                let msr = parseFloat(msrInputs[i].value);
+                let csd = parseFloat(csdInputs[i].value);
+                
+                let tr = msr + leastCount * csd;
+                document.getElementById("observationTable").rows[i+1].cells[2].innerText = tr.toFixed(6);
+                trValues.push(tr);
+            }
+            
+            if (trValues.length < 2) return;
+            
+            let lambdaValues = [];
+            for (let i = 1; i < trValues.length; i++) {
+                let lambdaHalf = Math.abs(trValues[i] - trValues[i - 1]);
+                document.getElementById("observationTable").rows[i+1].cells[3].innerText = lambdaHalf.toFixed(6);
+                lambdaValues.push(lambdaHalf);
+            }
+            
+            let meanLambda = lambdaValues.reduce((a, b) => a + b, 0) / lambdaValues.length;
+            let meanLambdaMeters = meanLambda / 1000;
+            document.getElementById("meanLambda").innerText = meanLambda.toFixed(6);
+            
+            let frequency = 2e6;
+            let density = 996.458;
+            let ultrasonicVelocity = 2 * meanLambdaMeters * frequency;
+            let compressibility = 1 / (density * Math.pow(ultrasonicVelocity, 2));
+            
+            document.getElementById("velocity").innerText = ultrasonicVelocity.toFixed(2);
+            document.getElementById("compressibility").innerText = compressibility.toExponential(6);
+        }
+    </script>
+</body>
+</html>
