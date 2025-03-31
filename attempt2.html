@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment Data Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('your-background-image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        .graph-container {
+            width: 600px;
+            height: 450px;
+            border: 1px solid #ddd;
+            margin: auto;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        input, select {
+            padding: 8px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Experiment: Temperature vs. Resistance</h2>
+            <label for="voltage">Constant Voltage (V): </label>
+            <input type="number" id="voltage" value="5">
+            <label for="current-unit">Current Unit:</label>
+            <select id="current-unit">
+                <option value="mA">Milliampere (mA)</option>
+                <option value="μA">Microampere (μA)</option>
+            </select>
+        </div>
+        <div class="card">
+            <table>
+                <tr>
+                    <th>Temperature (K)</th>
+                    <th>Current</th>
+                    <th>1/T (1/K)</th>
+                    <th>Resistance (Ω)</th>
+                    <th>log(R)</th>
+                </tr>
+                <tbody id="data-table"></tbody>
+            </table>
+            <button onclick="addRow()">Add Row</button>
+            <button onclick="calculate()">Calculate</button>
+        </div>
+        <div class="card">
+            <h3>Results</h3>
+            <p>β (Beta) = <span id="beta"></span></p>
+            <p>Eg (eV) = <span id="Eg"></span></p>
+        </div>
+        <div class="card">
+            <h3>Graph: Log(R) vs 1/T</h3>
+            <div class="graph-container">
+                <canvas id="graph"></canvas>
+            </div>
+        </div>
+        <div class="card">
+            <button onclick="window.location.href='info.html'">Go to Info Page</button>
+            <button onclick="window.location.href='home.html'">Go to Home Page</button>
+        </div>
+    </div>
+    <script>
+        let temperature = [], reciprocalT = [], resistance = [], logR = [];
+
+        function addRow() {
+            let table = document.getElementById("data-table");
+            let row = table.insertRow();
+            row.innerHTML = `<td><input type='number' class='temp'></td>
+                             <td><input type='number' class='curr'></td>
+                             <td class='reciprocalT'></td>
+                             <td class='resistance'></td>
+                             <td class='logR'></td>`;
+        }
+
+        function calculate() {
+            let voltage = parseFloat(document.getElementById("voltage").value);
+            let unit = document.getElementById("current-unit").value;
+            let tempInputs = document.querySelectorAll(".temp");
+            let currInputs = document.querySelectorAll(".curr");
+            let reciprocalTCells = document.querySelectorAll(".reciprocalT");
+            let resistanceCells = document.querySelectorAll(".resistance");
+            let logRCells = document.querySelectorAll(".logR");
+
+            temperature = [];
+            reciprocalT = [];
+            resistance = [];
+            logR = [];
+
+            for (let i = 0; i < tempInputs.length; i++) {
+                let T = parseFloat(tempInputs[i].value);
+                let I = parseFloat(currInputs[i].value);
+                if (unit === "mA") I /= 1000;
+                if (unit === "μA") I /= 1000000;
+                
+                if (T && I) {
+                    let recT = 1 / T;
+                    let R = voltage / I;
+                    let logResistance = Math.log10(R);
+                    temperature.push(T);
+                    reciprocalT.push(recT);
+                    resistance.push(R);
+                    logR.push(logResistance);
+                    reciprocalTCells[i].innerText = recT.toFixed(6);
+                    resistanceCells[i].innerText = R.toFixed(6);
+                    logRCells[i].innerText = logResistance.toFixed(6);
+                }
+            }
+            calculateBetaAndEg();
+            plotGraph();
+        }
+    </script>
+</body>
+</html>
