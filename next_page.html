@@ -75,9 +75,9 @@
         <p>Select an experiment to proceed:</p>
 
         <button class="btn" onclick="goToPage1()">Newton's Ring - Determine Radius of Curvature</button>
-        <button class="btn" onclick="goToPage1()">Energy Band Gap - Determine the band gap of given semiconductor</button>
-        <button class="btn" onclick="goToPage1()">Ultrasonic Interferometer - Determine the compressibility of given liquid</button>
-        <button class="btn" onclick="goToPage2()">Other Experiment - Coming Soon</button>
+        <button class="btn" onclick="goToPage2()">Energy Band Gap - Determine the band gap of given semiconductor</button>
+        <button class="btn" onclick="goToPage3()">Ultrasonic Interferometer - Determine the compressibility of given liquid</button>
+        <button class="btn" onclick="goToPage4()">Other Experiment - Coming Soon</button>
 
         <button class="btn" onclick="goBack()">Back to Home</button>
     </div>
@@ -88,8 +88,12 @@
         function goToPage1() {
             window.location.href = "web1.html"; 
         }
-
+    
         function goToPage2() {
+            window.location.href = "bandgap_info.html"; 
+        }
+        
+        function goToPage4() {
             alert("Other experiment is coming soon!");
         }
 
