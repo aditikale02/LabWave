@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Plotter & Slope Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: url('Wave world_.gif') no-repeat center center fixed;
+            color: white;
+            background-size: cover;
+            padding: 40px 20px;
+            backdrop-filter: blur(3px);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            color: black;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 32px;
+            text-transform: uppercase;
+            background: rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .btn {
+            background: #ff5733;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: 0.3s ease-in-out;
+        }
+        
+        .btn:hover {
+            background: #ff5733;
+            transform: scale(1.1);
+        }
+
+        canvas {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+
+        #slopeResult {
+            font-size: 22px;
+            font-weight: bold;
+            color:  #ff5733;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Graph Plotter & Slope Calculator</h1>
+
+    <div class="container">
+        <h2>Enter Values</h2>
+        <label>Enter X values (comma-separated):</label>
+        <input type="text" id="xValues" placeholder="e.g. 1,2,3,4">
+        
+        <label>Enter Y values (comma-separated):</label>
+        <input type="text" id="yValues" placeholder="e.g. 2,4,6,8">
+        
+        <label>Enter X-Axis Scale:</label>
+        <input type="number" id="xScale" placeholder="e.g. 10">
+        
+        <label>Enter Y-Axis Scale:</label>
+        <input type="number" id="yScale" placeholder="e.g. 20">
+        
+        <button class="btn" onclick="plotGraph()">Generate Graph</button>
+    </div>
+
+    <div class="container">
+        <h2>Graph Output</h2>
+        <canvas id="graphCanvas"></canvas>
+        <h3 id="slopeResult"></h3>
+    </div>
+
+    <script>
+        function plotGraph() {
+            let xValues = document.getElementById("xValues").value.split(',').map(Number);
+            let yValues = document.getElementById("yValues").value.split(',').map(Number);
+            let xScale = parseFloat(document.getElementById("xScale").value);
+            let yScale = parseFloat(document.getElementById("yScale").value);
+
+            if (xValues.length !== yValues.length || xScale <= 0 || yScale <= 0) {
+                alert("Please enter valid X, Y values, and positive scales.");
+                return;
+            }
+
+            let slope = "Not Possible";
+            if (xValues.length > 1) {
+                let n = xValues.length;
+                let sumX = xValues.reduce((a, b) => a + b, 0);
+                let sumY = yValues.reduce((a, b) => a + b, 0);
+                let sumXY = xValues.map((x, i) => x * yValues[i]).reduce((a, b) => a + b, 0);
+                let sumX2 = xValues.map(x => x * x).reduce((a, b) => a + b, 0);
+                
+                let rawSlope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+                let adjustedSlope = rawSlope * (yScale / xScale);; // Adjusting slope by scale
+                
+                slope = adjustedSlope.toFixed(4);  // Displays up to 4 decimal places
+            }
+
+            document.getElementById("slopeResult").innerText = "Slope: " + slope;
+
+            let ctx = document.getElementById("graphCanvas").getContext("2d");
+            new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        label: "Graph",
+                        data: yValues,
+                        borderColor: "#ff5733",
+                        backgroundColor: "rgba(255, 87, 51, 0.2)",
+                        borderWidth: 2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: { title: { display: true, text: "X-Axis (Scale: " + xScale + ")" } },
+                        y: { title: { display: true, text: "Y-Axis (Scale: " + yScale + ")" } }
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

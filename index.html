@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCCOE Pune - Engineering Physics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Background GIF */
+        body {
+            background: url('Wave world_.gif') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            text-align: center;
+            backdrop-filter: blur(3px); /* Light blur to improve text visibility */
+        }
+
+        .logo {
+            width: 180px;
+            margin-bottom: 15px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        h1 {
+            font-size: 32px;
+            text-transform: uppercase;
+            color: #eefffd; /* Bright Yellow for better contrast */
+            margin-bottom: 10px;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        .container {
+            background: rgba(215, 226, 231, 0.7); /* Dark transparent background for contrast */
+            padding: 20px;
+            width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
+            margin-top: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+            backdrop-filter: blur(2px);
+        }
+
+        label {
+            font-size: 16px;
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+            color: #eefffd;; /* Bright Yellow */
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            background:  #eefffd;
+            color: rgb(27, 27, 27);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background: #668af0; /* Green */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #5982f1;
+            transform: scale(1.05);
+        }
+
+        .student-list {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #fafcfc;
+            text-align: left;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PCCOE Pune Logo -->
+    <img src="pccoe_logo.png" alt="PCCOE Pune Logo" class="logo">
+
+    <h1>Engineering Physics (FY B.Tech)</h1>
+
+    <div class="container">
+        <h3 style="color: white;">Enter Student Details</h3>
+
+        <label for="students">Names (comma-separated):</label>
+        <input type="text" id="students" placeholder="Enter names">
+
+        <label for="prns">PRNs (comma-separated):</label>
+        <input type="text" id="prns" placeholder="Enter PRNs">
+
+        <button class="btn" onclick="displayStudents()">Submit</button>
+
+        <div class="student-list" id="studentList"></div>
+
+        <button class="btn" onclick="nextPage()" style="display: none;" id="nextBtn">Proceed</button>
+
+    </div>
+
+    <script>
+        function displayStudents() {
+            let names = document.getElementById("students").value.trim();
+            let prns = document.getElementById("prns").value.trim();
+
+            if (names && prns) {
+                let nameList = names.split(',').map(name => name.trim());
+                let prnList = prns.split(',').map(prn => prn.trim());
+
+                if (nameList.length === prnList.length && nameList.length > 0) {
+                    let output = "<h4>Registered Students:</h4>";
+                    for (let i = 0; i < nameList.length; i++) {
+                        output += `<b>${nameList[i]}</b> (PRN: ${prnList[i]})<br>`;
+                    }
+                    document.getElementById("studentList").innerHTML = output;
+                    document.getElementById("nextBtn").style.display = "block";
+                } else {
+                    alert("Please enter equal number of names and PRNs!");
+                }
+            } else {
+                alert("Please fill out both fields!");
+            }
+        }
+
+        function nextPage() {
+            let names = document.getElementById("students").value.trim();
+            if (names) {
+                localStorage.setItem("studentNames", names);
+                window.location.href = "next_page.html"; 
+            } else {
+                alert("Please enter at least one name.");
+            }
+        }
+    </script>
+
+</body>
+</html>
