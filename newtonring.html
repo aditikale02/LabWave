@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton's Rings</title>
+    <style>
+        body {
+            text-align: center;
+            background: url('Wave world_.gif') no-repeat center center fixed;
+            color: white;
+            background-size: cover;
+            padding: 40px 20px;
+            backdrop-filter: blur(3px);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            color: black;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid black;
+            text-align: center;
+        }
+        th {
+            background: #ddd;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Newton's Rings Experiment</h1>
+    <h2>Aim</h2>
+    <p>To determine the radius of curvature of a plano-convex lens using the phenomenon of Newton's rings.</p>
+    <h2>Apparatus</h2>
+    <p>Glass plate, a plano-convex lens, sodium lamp, lens, a travelling microscope</p>
+    
+    <h2>Observations</h2>
+    <table>
+        <tr>
+            <th>Ring No. (n)</th>
+            <th>X1 (Left Reading)</th>
+            <th>X2 (Right Reading)</th>
+            <th>Diameter (D)</th>
+            <th>D<sup>2</sup></th>
+        </tr>
+        <tbody id="dataTable">
+        </tbody>
+    </table>
+    
+    <button onclick="addRow()">Add Row</button>
+    <button onclick="calculateResults()">Calculate</button>
+    <button onclick="goToGraphPage()">Graph</button>
+    
+    <h2>Results</h2>
+    <p id="slopeResult"></p>
+    <p id="radiusResult"></p>
+    
+    <script>
+        function addRow() {
+            let table = document.getElementById("dataTable");
+            let row = table.insertRow();
+            for (let i = 0; i < 5; i++) {
+                let cell = row.insertCell(i);
+                if (i < 3) {
+                    let input = document.createElement("input");
+                    input.type = "number";
+                    input.step = "any";
+                    cell.appendChild(input);
+                } else {
+                    cell.innerText = "-";
+                }
+            }
+        }
+        
+        function calculateResults() {
+            let table = document.getElementById("dataTable");
+            let rows = table.rows;
+            let diameters = [];
+            let diametersSquared = [];
+            for (let i = 0; i < rows.length; i++) {
+                let x1 = parseFloat(rows[i].cells[1].children[0].value) || 0;
+                let x2 = parseFloat(rows[i].cells[2].children[0].value) || 0;
+                let diameter = Math.abs(x2 - x1);
+                let diameterSq = diameter * diameter;
+                diameters.push(diameter);
+                diametersSquared.push(diameterSq);
+                rows[i].cells[3].innerText = diameter.toFixed(4);
+                rows[i].cells[4].innerText = diameterSq.toFixed(4);
+            }
+            
+            if (diametersSquared.length >= 2) {
+                let slope = (diametersSquared[1] - diametersSquared[0]) / (2 - 1);
+                let lambda = 5893 * Math.pow(10, -8);
+                let radius = slope / (4 * lambda);
+                document.getElementById("slopeResult").innerText = "Slope: " + slope.toFixed(4);
+                document.getElementById("radiusResult").innerText = "Radius of Curvature: " + radius.toFixed(4) + " cm";
+            }
+        }
+        
+        function goToGraphPage() {
+            window.location.href = "web3.html";
+        }
+    </script>
+</body>
+</html>
