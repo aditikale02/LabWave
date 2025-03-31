@@ -3,169 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PCCOE Pune - Engineering Physics</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Background GIF */
-        body {
-            background: url('Wave world_.gif') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100vh;
-            text-align: center;
-            backdrop-filter: blur(3px); /* Light blur to improve text visibility */
-        }
-
-        .logo {
-            width: 180px;
-            margin-bottom: 15px;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        h1 {
-            font-size: 32px;
-            text-transform: uppercase;
-            color: #eefffd; /* Bright Yellow for better contrast */
-            margin-bottom: 10px;
-            animation: slideIn 1s ease-in-out;
-        }
-
-        .container {
-            background: rgba(215, 226, 231, 0.7); /* Dark transparent background for contrast */
-            padding: 20px;
-            width: 400px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
-            margin-top: 20px;
-            animation: fadeIn 1.5s ease-in-out;
-            backdrop-filter: blur(2px);
-        }
-
-        label {
-            font-size: 16px;
-            display: block;
-            margin-top: 10px;
-            text-align: left;
-            color: #eefffd;; /* Bright Yellow */
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-            background:  #eefffd;
-            color: rgb(27, 27, 27);
-        }
-
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            background: #668af0; /* Green */
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s ease-in-out;
-            margin-top: 10px;
-        }
-
-        .btn:hover {
-            background: #5982f1;
-            transform: scale(1.05);
-        }
-
-        .student-list {
-            margin-top: 15px;
-            font-size: 16px;
-            color: #fafcfc;
-            text-align: left;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    <title>LabWave</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="shortcut icon" href="./assets/atom.png" type="image/x-icon">
 </head>
 <body>
-
-    <!-- PCCOE Pune Logo -->
-    <img src="pccoe_logo.png" alt="PCCOE Pune Logo" class="logo">
-
-    <h1>Engineering Physics (FY B.Tech)</h1>
-
-    <div class="container">
-        <h3 style="color: white;">Enter Student Details</h3>
-
-        <label for="students">Names (comma-separated):</label>
-        <input type="text" id="students" placeholder="Enter names">
-
-        <label for="prns">PRNs (comma-separated):</label>
-        <input type="text" id="prns" placeholder="Enter PRNs">
-
-        <button class="btn" onclick="displayStudents()">Submit</button>
-
-        <div class="student-list" id="studentList"></div>
-
-        <button class="btn" onclick="nextPage()" style="display: none;" id="nextBtn">Proceed</button>
-
+    <header>
+        <div class="container">
+            <nav>
+                <h1>LabWave</h1>
+                <ul id="menu">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+                <button id="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+    <div class="hero">
+        <video autoplay muted loop>
+            <source src="D:\p1\homepage.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <h1>Lab<span>Wave</span></h1>
+            <p>Physics beyond the classroom.</p>
+        </div>
     </div>
-
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Physics World. All rights reserved.</p>
+        </div>
+    </footer>
     <script>
-        function displayStudents() {
-            let names = document.getElementById("students").value.trim();
-            let prns = document.getElementById("prns").value.trim();
-
-            if (names && prns) {
-                let nameList = names.split(',').map(name => name.trim());
-                let prnList = prns.split(',').map(prn => prn.trim());
-
-                if (nameList.length === prnList.length && nameList.length > 0) {
-                    let output = "<h4>Registered Students:</h4>";
-                    for (let i = 0; i < nameList.length; i++) {
-                        output += `<b>${nameList[i]}</b> (PRN: ${prnList[i]})<br>`;
-                    }
-                    document.getElementById("studentList").innerHTML = output;
-                    document.getElementById("nextBtn").style.display = "block";
-                } else {
-                    alert("Please enter equal number of names and PRNs!");
-                }
-            } else {
-                alert("Please fill out both fields!");
-            }
-        }
-
-        function nextPage() {
-            let names = document.getElementById("students").value.trim();
-            if (names) {
-                localStorage.setItem("studentNames", names);
-                window.location.href = "next_page.html"; 
-            } else {
-                alert("Please enter at least one name.");
-            }
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.getElementById("menu-toggle");
+            const menu = document.getElementById("menu");
+        
+            menuToggle.addEventListener("click", () => {
+                menu.classList.toggle("show");
+            });
+        });
+        
     </script>
+    <!-- Script for new component -->
+    <script>
+        const elements = [
+            { symbol: 'H', name: 'Hydrogen', number: 1, category: 'Nonmetal' },
+            { symbol: 'He', name: 'Helium', number: 2, category: 'Noble Gas' },
+            { symbol: 'Li', name: 'Lithium', number: 3, category: 'Alkali Metal' },
+            { symbol: 'Be', name: 'Beryllium', number: 4, category: 'Alkaline Earth Metal' },
+            { symbol: 'B', name: 'Boron', number: 5, category: 'Metalloid' },
+            { symbol: 'C', name: 'Carbon', number: 6, category: 'Nonmetal' },
+            { symbol: 'N', name: 'Nitrogen', number: 7, category: 'Nonmetal' },
+            { symbol: 'O', name: 'Oxygen', number: 8, category: 'Nonmetal' },
+            { symbol: 'F', name: 'Fluorine', number: 9, category: 'Halogen' },
+            { symbol: 'Ne', name: 'Neon', number: 10, category: 'Noble Gas' },
+        ];
 
+        const facts = [
+            "Water is the only natural substance found in all three states - solid, liquid, and gas - on Earth.",
+            "The most abundant element in the universe is hydrogen.",
+            "The human body contains enough carbon to make 900 pencils.",
+            "Gold is the only metal that is yellow in color.",
+            "Diamonds are the hardest natural substance on Earth."
+        ];
+
+        function createPeriodicTable() {
+            const periodicTable = document.getElementById('periodicTable');
+            elements.forEach(element => {
+                const elementDiv = document.createElement('div');
+                elementDiv.className = 'card element';
+                elementDiv.innerHTML = `
+                    <div class="element-symbol">${element.symbol}</div>
+                    <div class="element-name">${element.name}</div>
+                    <div class="element-category">${element.category}</div>
+                `;
+                periodicTable.appendChild(elementDiv);
+            });
+        }
+
+        function createFactCards() {
+            const factContainer = document.getElementById('factContainer');
+            facts.forEach(fact => {
+                const factDiv = document.createElement('div');
+                factDiv.className = 'card';
+                factDiv.textContent = fact;
+                factContainer.appendChild(factDiv);
+            });
+        }
+
+        function setupTabs() {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.setAttribute('aria-selected', 'false');
+                    });
+                    tab.classList.add('active');
+                    tab.setAttribute('aria-selected', 'true');
+
+                    const tabContents = document.querySelectorAll('.tab-content');
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    const targetId = tab.getAttribute('aria-controls');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+        }
+        
+   
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createPeriodicTable();
+            createFactCards();
+            setupTabs();
+        });
+        
+    </script>
 </body>
 </html>
