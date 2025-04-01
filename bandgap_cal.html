@@ -165,6 +165,44 @@
             calculateBetaAndEg();
             plotGraph();
         }
+
+        function calculateBetaAndEg() {
+            let n = reciprocalT.length;
+            let sumX = reciprocalT.reduce((a, b) => a + b, 0);
+            let sumY = logR.reduce((a, b) => a + b, 0);
+            let sumXY = reciprocalT.map((x, i) => x * logR[i]).reduce((a, b) => a + b, 0);
+            let sumX2 = reciprocalT.map(x => x * x).reduce((a, b) => a + b, 0);
+
+            let slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+            let beta = 2.303 * slope;
+            let k = 8.625e-5;
+            let Eg = 2 * beta * k;
+
+            document.getElementById("beta").innerText = beta.toFixed(6);
+            document.getElementById("Eg").innerText = Eg.toFixed(6);
+        }
+
+        function plotGraph() {
+            let ctx = document.getElementById("graph").getContext("2d");
+            new Chart(ctx, {
+                type: "scatter",
+                data: {
+                    datasets: [{
+                        label: "Log(R) vs 1/T",
+                        data: reciprocalT.map((x, i) => ({x, y: logR[i]})),
+                        borderColor: "blue",
+                        backgroundColor: "lightblue",
+                        showLine: true,
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: { title: { display: true, text: "1/T (1/K)" } },
+                        y: { title: { display: true, text: "Log(R)" } }
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
