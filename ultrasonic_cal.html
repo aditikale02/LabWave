@@ -5,108 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experiment Ultrasonic Interferometer</title>
     <style>
-        body { 
+        body {
             font-family: 'Poppins', sans-serif;
             background: url('bg1.png') no-repeat center center fixed;
             background-size: cover;
             text-align: center;
             margin: 20px;
-
-            font-family: Arial, sans-serif; 
-            text-align: center;
-            background-color: #feffff; /* Pastel Blue */
-            margin: 0;
-            overflow: hidden;
+            background-color: #feffff;
         }
-        #video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .container {
+            width: 80%;
+            margin: auto;
+            background: rgba(255, 255, 255, 0);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        table {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 3px solid black;
         }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; border: 3px solid black; }
-        th, td { border: 3px solid black; padding: 5px; text-align: center; }
-        th {
-            background-color: #1a035f;
-            color: white;
-            border: 5px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-            box-shadow: 4px 4px 8px rgba(16, 15, 15, 0.937);
-            font-size: 15px;
-           
+        th, td {
+            border: 3px solid black;
+            padding: 5px;
+            text-align: center;
         }
-        input { width: 80px; }
         h2 {
             font-weight: bold;
-            font-size: 50px; /* Increased size */
+            font-size: 30px;
             font-family: 'Georgia', serif;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
             color: #0f2236;
+        }
+        .calc-box {
+            background: #f0f8ff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: inline-block;
+            min-width: 200px;
+            font-size: 18px;
         }
         button {
             background-color: #0d025e;
             color: white;
-            padding: 12px 18px;
+            padding: 10px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             margin: 5px;
-            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
-            font-size: 18px;
         }
         button:hover {
-            background-color:#3f23ae;
+            background-color: #3f23ae;
         }
     </style>
 </head>
 <body>
-    <video id="video-background" autoplay muted loop>
-        <source src="https://www.videvo.net/videvo_files/converted/2014_12/preview/Physics_Experiment_Nov14_51_Videvo.mov61326.webm" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
-    
-    <h2>Experiment Ultrasonic Interferometer</h2>
-    
-    <label>Total divisions on circular scale:</label>
-    <input type="number" id="totalDivisions" placeholder="-" oninput="checkInput()"><br>
-    
-    <label>Smallest division on main scale:</label>
-    <input type="number" id="smallestDivision" placeholder="-" oninput="checkInput()"><br>
-    
-    <button onclick="calculateLeastCount()">Calculate Least Count</button>
-    <p>Least Count: <span id="leastCount">-</span></p>
-    
-    <h3>Observation Table</h3>
-    <table id="observationTable">
-        <tr>
-            <th>MSR (mm)</th>
-            <th>CSD</th>
-            <th>TR = MSR + LC * CSD</th>
-            <th>λ/2</th>
-        </tr>
-    </table>
-    <button onclick="addRow()">Add Observation</button>
-    <button onclick="calculateTRAndLambda()">Result</button>
-    
-    <h3>Results</h3>
-    <h4>
-    <p>Mean λ/2: <span id="meanLambda">-</span></p>
-    <p>Ultrasonic Velocity: <span id="velocity">-</span> m/s</p>
-    <p>Compressibility: <span id="compressibility">-</span> Pa⁻¹</p>
-    </h4>
+    <div class="container">
+        <div class="card">
+            <h2>Experiment: Ultrasonic Interferometer</h2>
+            <label>Total divisions on circular scale:</label>
+            <input type="number" id="totalDivisions" placeholder="-" oninput="checkInput()"><br>
+            
+            <label>Smallest division on main scale:</label>
+            <input type="number" id="smallestDivision" placeholder="-" oninput="checkInput()"><br>
+            
+            <button onclick="calculateLeastCount()">Calculate Least Count</button>
+            <div class="calc-box">Least Count: <span id="leastCount">-</span></div>
+        </div>
 
-    <!-- Back to Info and Homepage Buttons -->
-    <button onclick="location.href='ultrasonic_info.html'">Back to Info</button>
-    <button onclick="location.href='Exp_list.html'">Back to Experiment List</button>
-    
+        <div class="card">
+            <h3>Observation Table</h3>
+            <table id="observationTable">
+                <tr>
+                    <th>MSR (mm)</th>
+                    <th>CSD</th>
+                    <th>TR = MSR + LC * CSD</th>
+                    <th>λ/2</th>
+                </tr>
+            </table>
+            <button onclick="addRow()">Add Observation</button>
+            <button onclick="calculateTRAndLambda()">Result</button>
+        </div>
+
+        <div class="card">
+            <h3>Results</h3>
+            <div class="calc-box">Mean λ/2: <span id="meanLambda">-</span></div>
+            <div class="calc-box">Ultrasonic Velocity: <span id="velocity">-</span> m/s</div>
+            <div class="calc-box">Compressibility: <span id="compressibility">-</span> Pa⁻¹</div>
+        </div>
+
+        <div class="card">
+            <button onclick="location.href='ultrasonic_info.html'">Back to Info</button>
+            <button onclick="location.href='Exp_list.html'">Back to Experiment List</button>
+            <button onclick="location.href='ultrasonic_res.html'">Go to Result page</button>
+        </div>
+    </div>
+
     <script>
         let leastCount = 0;
-        
         function checkInput() {
             let totalDiv = document.getElementById("totalDivisions").value;
             let smallestDiv = document.getElementById("smallestDivision").value;
@@ -120,57 +125,42 @@
             leastCount = smallestDiv / totalDiv;
             document.getElementById("leastCount").innerText = leastCount.toFixed(6);
         }
-        
+
         function addRow() {
             let table = document.getElementById("observationTable");
             let row = table.insertRow();
-            
-            let msrCell = row.insertCell(0);
-            let csdCell = row.insertCell(1);
-            let trCell = row.insertCell(2);
-            let lambdaCell = row.insertCell(3);
-            
-            msrCell.innerHTML = `<input type='number' class='msr'>`;
-            csdCell.innerHTML = `<input type='number' class='csd'>`;
-            trCell.innerText = "-";
-            lambdaCell.innerText = "-";
+            row.insertCell(0).innerHTML = `<input type='number' class='msr'>`;
+            row.insertCell(1).innerHTML = `<input type='number' class='csd'>`;
+            row.insertCell(2).innerText = "-";
+            row.insertCell(3).innerText = "-";
         }
-        
+
         function calculateTRAndLambda() {
             let msrInputs = document.querySelectorAll(".msr");
             let csdInputs = document.querySelectorAll(".csd");
             let trValues = [];
             
-            let allInputsFilled = Array.from(msrInputs).every(input => input.value) && Array.from(csdInputs).every(input => input.value);
-            if (!allInputsFilled || leastCount === 0) return;
-            
+            if (!leastCount || !msrInputs.length || !csdInputs.length) return;
             for (let i = 0; i < msrInputs.length; i++) {
                 let msr = parseFloat(msrInputs[i].value);
                 let csd = parseFloat(csdInputs[i].value);
-                
                 let tr = msr + leastCount * csd;
                 document.getElementById("observationTable").rows[i+1].cells[2].innerText = tr.toFixed(6);
                 trValues.push(tr);
             }
-            
             if (trValues.length < 2) return;
-            
             let lambdaValues = [];
             for (let i = 1; i < trValues.length; i++) {
                 let lambdaHalf = Math.abs(trValues[i] - trValues[i - 1]);
                 document.getElementById("observationTable").rows[i+1].cells[3].innerText = lambdaHalf.toFixed(6);
                 lambdaValues.push(lambdaHalf);
             }
-            
             let meanLambda = lambdaValues.reduce((a, b) => a + b, 0) / lambdaValues.length;
-            let meanLambdaMeters = meanLambda / 1000;
             document.getElementById("meanLambda").innerText = meanLambda.toFixed(6);
-            
             let frequency = 2e6;
             let density = 996.458;
-            let ultrasonicVelocity = 2 * meanLambdaMeters * frequency;
+            let ultrasonicVelocity = 2 * (meanLambda / 1000) * frequency;
             let compressibility = 1 / (density * Math.pow(ultrasonicVelocity, 2));
-            
             document.getElementById("velocity").innerText = ultrasonicVelocity.toFixed(2);
             document.getElementById("compressibility").innerText = compressibility.toExponential(6);
         }
