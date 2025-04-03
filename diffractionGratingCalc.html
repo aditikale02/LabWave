@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observations - Diffraction Grating</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            background:  #0e0158;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        h2 {
+            color: #0e0158;
+            border-bottom: 2px solid  #0e0158;
+            padding-bottom: 5px;
+            margin-top: 20px;
+        }
+        table {
+            width: 2%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            width: 2%;
+            border: 1px solid #ddd;
+            padding: 3px;
+            text-align: center;
+        }
+        th {
+            background: #0e0158;
+            color: white;
+        }
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            text-align: center;
+            background: #d9534f;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        .back-button:hover {
+            background: #c9302c;
+        }
+        
+        .calc-button {
+            display: block;
+            width: 250px;
+            margin: 20px auto;
+            text-align: center;
+            background: #0e0158;
+            color: white;
+            padding: 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        .calc-button:hover {
+            background: #0e0158;
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="container">
+        <div class="remark">
+            <strong>Note:</strong> To represent angles, we use the symbol <strong>'.'</strong> for degrees and <strong>another '.'</strong> (dots) for minutes.
+        </div>
+        <h1>Observations</h1>
+        
+        <h2>Grating Element Calculation</h2>
+        <p><strong>N =</strong> 15000 lines per inch, <strong>1 inch =</strong> 2.54 cm</p>
+        <p><strong>(a + b) =</strong> (2.54 cm) / 15000 = <input type="text"> cm</p>
+        <p><strong>Least count of spectrometer =</strong> <input type="text"></p>
+        
+        <h2>Observation Table</h2>
+        <table>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Spectral Lines Color</th>
+                <th>Left (θ₁)</th>
+                <th>Right (θ₂)</th>
+                <th>2θ = |θ₂ - θ₁|</th>
+                <th>θ = 2θ/2</th>
+           
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Violet</td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Green</td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Yellow</td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Red</td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Spectral Lines Color</th>
+                <th>sin(θ)</th>
+                <th>λ = (a + b)sin(θ) (in Å)</th>
+                <th>λ_std (in Å)</th>
+                <th>% Deviation</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Violet</td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>   
+                <td>   4387   </td>
+                <td><input type="text"></td>
+            </tr>  
+            <tr>
+                <td>2</td>
+                <td>Green</td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>   
+                <td>   5460   </td>
+                <td><input type="text"></td>
+            </tr>    
+            <tr>
+                <td>3</td>
+                <td>Yellow</td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>   
+                <td>   5790   </td>
+                <td><input type="text"></td>
+            </tr> 
+            <tr>
+                <td>4</td>
+                <td>Red</td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>   
+                <td>   6390  </td>
+                <td><input type="text"></td>
+            </tr> 
+        </table>    
+        
+    </div>
+
+        <div class="container">
+            <h1>Observations - Diffraction Grating</h1>
+            
+            <h2>Wavelength Calculation</h2>
+            
+            <label>Enter Color (Violet, Green, Yellow, Red):</label><br>
+            <input type="text" id="colorInput" placeholder="e.g., Violet"><br>
+    
+            <label>Left Angle (θ₁) in °:</label><br>
+            <input type="number" id="theta1" placeholder="Enter θ₁"><br>
+    
+            <label>Right Angle (θ₂) in °:</label><br>
+            <input type="number" id="theta2" placeholder="Enter θ₂"><br>
+    
+            <label>(a + b) in cm:</label><br>
+            <input type="number" id="gratingElement" placeholder="Enter (a + b)"><br>
+    
+            <button onclick="calculateWavelength()">Calculate Wavelength (λ in Å)</button>
+    
+            <div class="result" id="result"></div>
+ 
+            
+                   <!-- Navigation Buttons -->
+                   <h2>NAVIGATE</h2>
+            <div class="button-container" style="margin-top: 20px;">
+            
+            <a href="Exp_list.html" class="calc-button">Experiment List</a>
+            <a href="diffractionGrating.html" class="calc-button">Analysis Page</a>
+            </div>
+
+        </div>
+    
+        <script>
+            <div class="remark">
+            <strong>Note:</strong> To represent angles, we use the symbol <strong>°</strong> for degrees and <strong>′</strong> (dots) for minutes.
+        </div>
+            function calculateWavelength() {
+                const color = document.getElementById('colorInput').value.trim().toLowerCase();
+                const theta1 = parseFloat(document.getElementById('theta1').value);
+                const theta2 = parseFloat(document.getElementById('theta2').value);
+                const gratingElement = parseFloat(document.getElementById('gratingElement').value);
+    
+                if (!color || isNaN(theta1) || isNaN(theta2) || isNaN(gratingElement)) {
+                    alert("Please enter all required values correctly.");
+                    return;
+                }
+    
+                const validColors = ["violet", "green", "yellow", "red"];
+                if (!validColors.includes(color)) {
+                    alert("Invalid color. Please enter Violet, Green, Yellow, or Red.");
+                    return;
+                }
+    
+                const twoTheta = Math.abs(theta2 - theta1);
+                const theta = twoTheta / 2;
+                const sinTheta = Math.sin(theta * (Math.PI / 180)); // Convert to radians
+                const wavelength = (gratingElement * sinTheta) * 1e8; // in Ångströms
+    
+                document.getElementById('result').innerHTML = 
+                    `Wavelength (λ) for ${color.charAt(0).toUpperCase() + color.slice(1)} = ${wavelength.toFixed(2)} Å`;
+            }
+
+        </script>
+       
+
+    
+</body>
+</html>

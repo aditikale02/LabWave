@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observations - Diffraction Grating</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            width: 80%;
+            margin: 10px auto;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #0e0158;
+        }
+        h1 {
+            font-size: 1.5em;
+            background: #0e0158;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        h2 {
+            font-size: 1.2em;
+            border-bottom: 1px solid #0e0158;
+            padding-bottom: 5px;
+            margin-top: 15px;
+        }
+        table {
+            width: 90%;
+            border-collapse: collapse;
+            margin: 10px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 4px;
+            text-align: center;
+        }
+        th {
+            background: #0e0158;
+            color: white;
+        }
+        .button-container {
+            text-align: center;
+            margin: 15px 0;
+        }
+        .button-container button {
+            background: #0e0158;
+            color: white;
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .button-container button:hover {
+            background: #370d80;
+        }
+        canvas {
+            width: 90% !important;
+            max-width: 500px;
+            margin: 10px auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Newton's Rings Experiment</h1>
+        <h2>Observations</h2>
+        
+        <p><strong>Wavelength of Sodium Light, λ = 5893 × 10⁻⁸ cm</strong></p>
+        <p><strong>Least Count of Microscope = <input type="text" size="5"> cm</strong></p>
+
+        <h2>Observations Table</h2>
+        <table>
+            <tr>
+                <th>Ring No.</th>
+                <th>X1 (Left)</th>
+                <th>X2 (Right)</th>
+                <th>Diameter (D)</th>
+                <th>D²</th>
+            </tr>
+            <tbody id="dataTable"></tbody>
+        </table>
+
+        <div class="button-container">
+            <button onclick="addRow()">Add Row</button>
+            <button onclick="calculateResults()">Calculate</button>
+        </div>
+
+        <h2>Results</h2>
+        <p id="slopeResult"></p>
+        <p id="radiusResult"></p>
+
+        <h2>Graph</h2>
+        <canvas id="graphCanvas"></canvas>
+
+        <h2>Navigation</h2>
+        <div class="button-container">
+            <button onclick="window.location.href='Exp_list.html'">Experiment List</button>
+            <button onclick="window.location.href='NewtonsRingTheory.html'">Analysis Page</button>
+        </div>
+    </div>
+
+    <script>
+        function addRow() {
+            const table = document.getElementById("dataTable");
+            const row = table.insertRow();
+            for (let i = 0; i < 5; i++) {
+                const cell = row.insertCell(i);
+                if (i < 3) {
+                    const input = document.createElement("input");
+                    input.type = "number";
+                    input.step = "any";
+                    input.style.width = "60px";
+                    cell.appendChild(input);
+                } else {
+                    cell.innerText = "-";
+                }
+            }
+        }
+
+        function calculateResults() {
+            const table = document.getElementById("dataTable");
+            const rows = table.rows;
+            const diameters = [], diametersSquared = [], ringNumbers = [];
+
+            for (let i = 0; i < rows.length; i++) {
+                const x1 = parseFloat(rows[i].cells[1].children[0]?.value) || 0;
+                const x2 = parseFloat(rows[i].cells[2].children[0]?.value) || 0;
+                const diameter = Math.abs(x2 - x1);
+                const diameterSq = diameter ** 2;
+                ringNumbers.push(i + 1);
+                diameters.push(diameter);
+                diametersSquared.push(diameterSq);
+                rows[i].cells[3].innerText = diameter.toFixed(4);
+                rows[i].cells[4].innerText = diameterSq.toFixed(4);
+            }
+
+            if (diametersSquared.length >= 2) {
+                const slope = (diametersSquared[1] - diametersSquared[0]);
+                const lambda = 5893e-8;
+                const radius = slope / (4 * lambda);
+                document.getElementById("slopeResult").innerText = "Slope: " + slope.toFixed(4);
+                document.getElementById("radiusResult").innerText = "Radius of Curvature: " + radius.toFixed(4) + " cm";
+            }
+
+            plotGraph(ringNumbers, diametersSquared);
+        }
+
+        function plotGraph(ringNumbers, diametersSquared) {
+            const ctx = document.getElementById('graphCanvas').getContext('2d');
+            if (window.graphInstance) window.graphInstance.destroy();
+
+            window.graphInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ringNumbers,
+                    datasets: [{
+                        label: 'D² vs Ring Number',
+                        data: diametersSquared,
+                        borderColor: '#0e0158',
+                        backgroundColor: 'rgba(14, 1, 88, 0.2)',
+                        borderWidth: 2,
+                        tension: 0.2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: { title: { display: true, text: 'Ring Number' } },
+                        y: { title: { display: true, text: 'D² (cm²)' } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
