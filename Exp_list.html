@@ -74,12 +74,17 @@
         <h1>Welcome, <span id="welcomeNames"></span>!</h1>
         <p>Select an experiment to proceed:</p>
 
-        <button class="btn" onclick="goToPage1()">Energy Band Gap - Determine the band gap of given semiconductor</button>
-        <button class="btn" onclick="goToPage2()">Ultrasonic Interferometer - Determine the compressibility of given liquid</button>
-        <button class="btn" onclick="goToPage3()">Newton's Ring - Determine Radius of Curvature</button>
-        <button class="btn" onclick="goToPage4()">Quincke's Method - Determine the Magnetic Susceptibility</button>
-        <button class="btn" onclick="goToPage6()">Graph Plotter</button>
-        <button class="btn" onclick="goToPage()">Other Experiment - Coming Soon</button>
+        <button class="btn" onclick="goToPage1()">Energy Band Gap - To determine the band gap of given semiconductor</button>
+        <button class="btn" onclick="goToPage2()">Ultrasonic Interferometer - To determine the compressibility of given liquid</button>
+        <button class="btn" onclick="goToPage3()">Newton's Ring - To determine Radius of Curvature</button>
+        <button class="btn" onclick="goToPage4()">Diffraction Grating - To determine the wavelength of different colours</button>
+        <button class="btn" onclick="goToPage5()">Malus Law - To verify the malus law of polarization of light</button>
+        <button class="btn" onclick="goToPage6()">Solar Cell - To determine Fill Factor using IV characteristics </button>
+        <button class="btn" onclick="goToPage7()">LASER - To determine the size of grating element using LASER</button>
+        <button class="btn" onclick="goToPage8()">Four Probe Method - To determine the energy band gap of a given sample</button>
+        <button class="btn" onclick="goToPage9()">Double Refraction - To determine the refractive indices and type of crystal</button>
+        <button class="btn" onclick="goToPage10()">Graph Plotter</button>
+        <button class="btn" onclick="goToPage11()">Other Experiment - Coming Soon</button>
         <button class="btn" onclick="goBack()">Back to Home</button>
     </div>
 
@@ -99,14 +104,34 @@
         }
 
         function goToPage4() {
-            window.location.href = "quincke's_cal.html"; 
+            window.location.href = "diffraction_grating_cal.html"; 
+        }
+
+         function goToPage5() {
+            window.location.href = "malus_cal.html"; 
+        }
+
+         function goToPage6() {
+            window.location.href = "solar_cal.html"; 
+        }
+
+         function goToPage7() {
+            window.location.href = "laser_cal.html"; 
+        }
+
+         function goToPage8() {
+            window.location.href = "four_probe_cal.html"; 
+        }
+
+         function goToPage9() {
+            window.location.href = "double_refraction_cal.html"; 
         }
         
-        function goToPage6() {
+        function goToPage10() {
             window.location.href = "graph_plotter.html";
         }
 
-        function goToPage5() {
+        function goToPage11() {
             alert("Other experiment is coming soon!");
         }
 
