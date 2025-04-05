@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment Info - Malus's Law</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
+        .card { background: #f9f9f9; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); max-width: 800px; margin: auto; margin-bottom: 20px; text-align: left; }
+        h1 { font-size: 32px; font-weight: bold; text-align: center; margin-bottom: 20px; }
+        h2 { color: #4682B4; }
+        p { text-align: justify; }
+        ul { text-align: justify; }
+        button { margin-top: 10px; padding: 10px; cursor: pointer; background-color: #4682B4; color: white; border: none; border-radius: 5px; display: block; margin: 20px auto; }
+    </style>
+</head>
+<body>
+    <h1>Polarization Experiment: Malus's Law</h1>
+    
+    <div class="card">
+        <h2>Aim</h2>
+        <p>To verify the cosine square law of Malus for plane polarized light.</p>
+    </div>
+
+    <div class="card">
+        <h2>Apparatus</h2>
+        <p>Lamp, two polaroids, photocell, micro-ammeter.</p>
+    </div>
+    
+    <div class="card">
+        <h2>Theory</h2>
+        <p>Malus's Law states that the intensity of polarized light passing through an analyzer varies as the square of the cosine of the angle between the light’s initial polarization direction and the axis of the analyzer. Mathematically, it is given by:</p>
+        <p style="text-align:center; font-weight:bold;">I = I<sub>max</sub> cos²θ</p>
+        <p>where:<br>
+            I is the transmitted intensity,<br>
+            I<sub>max</sub> is the maximum intensity, and<br>
+            θ is the angle between the light’s initial polarization direction and the axis of the analyzer.
+        </p>
+    </div>
+    
+    <div class="card">
+        <h2>Fig.1: Experimental Arrangement</h2>
+        <p>Diagram of the experimental setup showing the lamp, polaroids, analyzer, and micro-ammeter.</p>
+        <img src="experiment_setup.png" alt="Experimental Arrangement" style="width:100%; max-width:600px; display:block; margin:auto;">
+    </div>
+    
+    <div class="card">
+        <h2>Procedure</h2>
+        <p>Take the polariser from the accessories and mount it at the centre of Malus Law apparatus after replacing the central circular plate with it. Assemble the lamp, polariser, analyser and photo detector as shown in the block diagram. Ensure that the centre of LED light source, polarizer, analyser and photo detector all lie collinearly by suitable height adjustment as shown in Figure 1.</p>
+        <p>Initially set the gain adjust knob at anti-clockwise direction. Connect the light source to light source terminals and photodetector to photodetector terminals with appropriate polarity using patch cords. Connect the mains cord to the apparatus and switch 'ON' the supply.</p>
+        <p>Adjust the gain of the photodetector with the provided gain adjust knob (recommended above middle position). <b>Note:</b> To avoid the over range on display, adjust the gain adjust knob.</p>
+        <p>Rotate the analyser in its own plane (circular scale) till the current in the photo detector shows maximum. Read the current as I<sub>max</sub>. Also, read this position on analyser's circular dial.</p>
+        <p>Gradually rotate the analyser in its own plane with 10° increments. Simultaneously read the analyser's position on its circular scale and current at each increment.</p>
+        <p>Stop rotating the analyser at the position of minimum intensity. At the maximum and minimum current positions of the analyser, the optic axes of both polaroids become mutually perpendicular to each other.</p>
+        <p>Calculate the relative intensities, I / I<sub>max</sub> for the various angles.</p>
+        <p>From the above observations, I / I<sub>max</sub> = cos²θ is established.</p>
+        <p>Plot a graph between the relative intensity, I / I<sub>max</sub> and relative angle, θ between the optic axes of both the polaroids.</p>
+        <p>From the above plot, it is evident that relative intensity, I/ I<sub>max</sub> is the square of the cosine function of the relative angle between the optic axes of both polaroids.</p>
+        <p>Hence, from the observation table: I = I<sub>max</sub> cos²θ or I / I<sub>max</sub> = cos²θ.</p>
+        <p>Thus, Malus's Law is verified using two Polaroids.</p>
+    </div>
+    
+    <div class="card">
+        <h2>Applications</h2>
+        <p>Malus’s Law is widely used in optics and engineering. Some key applications include:</p>
+        <ul>
+            <li>Determining the polarization state of light.</li>
+            <li>Reducing glare in sunglasses and camera filters.</li>
+            <li>Used in LCD screens and optical communication systems.</li>
+            <li>Polarized light microscopy for material analysis.</li>
+            <li>Optical isolators in laser technology to control light direction.</li>
+        </ul>
+    </div>
+    
+    <div class="card">
+        <h2>Expected Observations</h2>
+        <p>As the relative angle increases, the transmitted intensity follows the cosine squared relationship:</p>
+        <ul>
+            <li>At 0°, the transmitted intensity is maximum.</li>
+            <li>At 45°, the intensity is reduced to 50% of the maximum.</li>
+            <li>At 90°, the transmitted intensity is nearly zero.</li>
+        </ul>
+    </div>
+    
+    <div class="card">
+        <h2>Precautions</h2>
+        <ul>
+            <li>Ensure proper alignment of the polarizer and analyzer.</li>
+            <li>Take multiple readings to minimize experimental errors.</li>
+            <li>Use a stable light source to avoid fluctuations.</li>
+            <li>Avoid parallax error while noting microammeter readings.</li>
+        </ul>
+    </div>
+    
+    <div style="display: flex; justify-content: center; gap: 20px;">
+        <button onclick="window.history.back()">Back to Experiment List</button>
+        <button onclick="location.href='malus_law.html'">Go to Experiment Calculation</button>
+    </div>
+</body>
+</html>
