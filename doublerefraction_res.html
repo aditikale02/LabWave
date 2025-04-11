@@ -74,12 +74,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>EXPERIMENT NO. 11 - ENERGY BAND GAP</h1>
+        <h1>Experiment No. 7: Double Refraction (Birefringence)</h1>
         <div class="card">
-            <h3><u>AIM - APPARATUS - PRIOR CONCEPTS</u></h3>
-            <p><strong>Aim:</strong> To determine the forbidden energy gap of a given semiconductor.</p>
-            <p><strong>Apparatus:</strong> P.N junction diode, sand or oil bath, thermometer (100°C), micro-ammeter (50 µA), 1.5V D. C. supply, heating coil, etc.</p>
-            <p><strong>Prior Concepts:</strong> Semiconductor energy band structure, forbidden energy gap, Ohm's law, PN junction diode.</p>
+            <h3>AIM - APPARATUS - PRIOR CONCEPTS</h3>
+            <p><strong>Aim:</strong>To determine the refractive index of ordinary and extra-ordinary rays and identification of types of crystal using the double refraction phenomenon.</p>
+            <p><strong>Apparatus:</strong> Spectrometer, source of light (sodium light), quartz prism & polarizer attachments to the telescope.</p>
+            <p><strong>Prior Concepts:</strong> Refraction, double refraction, polarization, Snell's law of refraction.</p>
         </div>
        
         <div class="image-container">
@@ -88,36 +88,31 @@
         
         <h3><u>OBSERVATION TABLE</u></h3>
         <table>
-            <tr>
-                <th>Temperature (K)</th>
-                <th>Current</th>
-                <th>1/T (1/K)</th>
-                <th>Resistance (Ω)</th>
-                <th>log(R)</th>
-            </tr>
-            <tbody id="data-table"></tbody>
+            <thead>
+              <tr>
+                <th>Q1 (°)</th><th>Q1 (′)</th>
+                <th>Q2 (°)</th><th>Q2 (′)</th>
+                <th>Q3 (°)</th><th>Q3 (′)</th>
+                <th>|Q1 − Q2| (° ′)</th><th>|Q1 − Q3| (° ′)</th>
+              </tr>
+            </thead>
         </table>
         
-        <h3><u>GRAPH</u></h3>
-        <div class="graph-container">
-            <canvas id="graph"></canvas>
-        </div>
 
         <div class="card">
             <h3><u>IMPORTANT FORMULAS</u></h3>
-            <p><strong>Resistance (R):</strong> R = V / I</p>
-            <p><strong>Log of Resistance:</strong> log<sub>10</sub>(R)</p>
-            <p><strong>Reciprocal of Temperature:</strong> 1/T</p>
-            <p><strong>Activation Energy (E<sub>g</sub>):</strong> E<sub>g</sub> = 2 × k<sub>B</sub> × β</p>
+            <p><strong>Refractive index for ordinary rays:</strong> u<sub>o</sub>sin((A+dm<sub>o</sub>)/2)/sin(A/2)</p>
+            <p><strong>Refractive index for extraordinary rays:</strong> u<sub>e</sub>sin((A+dm<sub>e</sub>)/2)/sin(A/2)</p>
         </div>
 
         <h3><u>CALCULATIONS:</u></h3>
-        <p><strong>Beta (β):</strong> <span id="display-beta"></span></p>
-        <p><strong>Energy Gap (Eg):</strong> <span id="display-Eg"></span></p>
+        <p><strong>Refractive index for ordinary rays:</strong> u<sub>o</sub>sin((A+dm<sub>o</sub>)/2)/sin(A/2)<span id="display-beta"></span></p>
+        <p><strong>Refractive index for extraordinary rays:</strong> u<sub>e</sub>sin((A+dm<sub>e</sub>)/2)/sin(A/2)<span id="display-beta"></span></p>
         
         <h3><u>RESULT:</u></h3>
-        <p><strong>The Energy gap of the  given semiconductor is found to be </strong> <span id="display-Eg"></span> eV.</p>
-        <p><strong>It can, therefore, be identified that the given semiconductor material is <b><u> Silicon.</u></b>  </p>
+        <p><strong>As per the calculations, the result shows following conditions :<br> u<sub>o</sub> < u<sub>e</sub>
+        <br>u<sub>o</sub> > u<sub>e</sub></strong> <span id="display-Eg"></span> eV.</p>
+        <p><strong>It can, therefore, be identified that the crystal is <sdfs>   </p>
         
         <button onclick="printResult()">Print Result</button>
         <button onclick="window.location.href='Exp_list.html'">Go to Experiment list </button>
