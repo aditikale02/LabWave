@@ -5,52 +5,92 @@
   <title>Double Refraction Result</title>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f4f4f9;
-      text-align: center;
-      margin: 20px;
+        font-family: 'Poppins', sans-serif;
+        background: url('bg1.png') no-repeat center center fixed;
+        background-size: cover;
+        text-align: center;
+        margin: 20px;
+
+        font-family: 'Poppins', sans-serif;
+        background-color: #f4f4f9;
+        text-align: center;
+        margin: 20px;
     }
     .container {
-      width: 90%;
-      margin: auto;
+        width: 80%;
+        margin: auto;
+    }
+    h1 {
+        color: black;
+        font-size: 60px;
+        font-weight: bold;
+        text-align: center;
+        font-family: 'Raleway', sans-serif;
+        text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
     }
     h2 {
-      color: #33007f;
-      font-size: 28px;
-      border-bottom: 2px solid #240279;
-      padding-bottom: 5px;
+        color: #33007f;
+        font-size: 28px;
+        text-transform: uppercase;
+        border-bottom: 2px solid #240279;
+        padding-bottom: 5px;
+    }
+    h3 {
+        color: #060508;
+        font-size: 20px;
+        padding-bottom: 5px;
+    }
+    .card {
+        background: white;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
     table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
     }
     th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: center;
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
     }
     th {
-      background-color: #2a0483;
-      color: white;
+        background-color: #2a0483;
+        color: white;
     }
-    input {
-      width: 50px;
-      padding: 5px;
+    .graph-container {
+        width: 600px;
+        height: 450px;
+        border: 1px solid #ddd;
+        margin: auto;
+        padding: 10px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
     button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      background-color: #2e0e6a;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+        background: #2e0e6a;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
     }
     button:hover {
-      background-color: #5207b3;
+        background: #5207b3;
     }
-  </style>
+    input, select {
+        padding: 8px;
+        margin: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
 </head>
 <body>
   <div class="container">
@@ -80,8 +120,14 @@
     </table>
 
     <button onclick="calculateDifferences()">Calculate</button>
-  </div>
 
+  </div>
+<div class="card">
+            <h2>NAVIGATE</h2>
+            <button onclick="window.location.href='doublerefraction_info.html'">Go to Info Page</button>
+            <button onclick="window.location.href='Exp_list.html'">Go to Experiment list </button>
+            <button onclick="window.location.href='doublerefraction_res.html'">Go to result page </button>
+        </div>
   <script>
    function getAngleInDegrees(deg, min) {
   return parseFloat(deg) + parseFloat(min) / 60;
