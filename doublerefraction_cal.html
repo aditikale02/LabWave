@@ -96,28 +96,52 @@
   <div class="container">
     <h2>Experiment No. 7: Double Refraction (Birefringence)</h2>
 
+    <style>
+      table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+      }
+      th, td {
+        width: 10%;
+        text-align: center;
+        vertical-align: middle;
+      }
+      input[type="number"] {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 4px;
+        text-align: center;
+      }
+    </style>
+    
     <table>
       <thead>
         <tr>
-          <th>Q1 (°)</th><th>Q1 (′)</th>
-          <th>Q2 (°)</th><th>Q2 (′)</th>
-          <th>Q3 (°)</th><th>Q3 (′)</th>
-          <th>|Q1 − Q2| (° ′)</th><th>|Q1 − Q3| (° ′)</th>
+          <th>Q1 (°)</th>
+          <th>Q1 (′)</th>
+          <th>Q2 (°)</th>
+          <th>Q2 (′)</th>
+          <th>Q3 (°)</th>
+          <th>Q3 (′)</th>
+          <th>|Q1 − Q2| (° ′)</th>
+          <th>|Q1 − Q3| (° ′)</th>
         </tr>
       </thead>
       <tbody id="data-table">
         <tr>
-          <td><input type="number" class="q1-deg"onclick="angleQ1()" /></td>
-          <td><input type="number" class="q1-min"onclick="angleQ1()" /></td>
-          <td><input type="number" class="q2-deg"onclick="angleQ1()" /></td>
+          <td><input type="number" class="q1-deg" onclick="angleQ1()" /></td>
+          <td><input type="number" class="q1-min" onclick="angleQ1()" /></td>
+          <td><input type="number" class="q2-deg" onclick="angleQ1()" /></td>
           <td><input type="number" class="q2-min" onclick="angleQ1()" /></td>
-          <td><input type="number" class="q3-deg" onclick="angleQ1()"/></td>
+          <td><input type="number" class="q3-deg" onclick="angleQ1()" /></td>
           <td><input type="number" class="q3-min" /></td>
           <td class="diff12-dm"></td>
           <td class="diff13-dm"></td>
         </tr>
       </tbody>
     </table>
+    
 
     <button onclick="calculateDifferences()">Calculate</button>
 
