@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Four Probe Method - Theory</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+
+            font-family: 'Poppins', sans-serif;
+            background: url('bg1.png') no-repeat center center fixed;
+            background-size: cover;
+            margin: 20px;
+
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: blue;
+        }
+        h2 {
+            color: blue;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+        }
+        .content {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .formula {
+            font-weight: bold;
+            background: #eef;
+            padding: 5px;
+            display: inline-block;
+            border-radius: 5px;
+        }
+        ol {
+            margin-top: 10px;
+        }
+        img {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+            border: 2px solid #ccc;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-container button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button-container button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>FOUR PROBE METHOD-2</h1>
+    </header>
+
+    <section class="content">
+
+        <h2>AIM</h2>
+        <p>To determine the band gap of germanium by the four probe method.</p>
+
+        <h2>APPARATUS</h2>
+        <p>Probe arrangement, sample, oven (0-200°C), constant current generator, oven power supply, and digital panel meter (measuring voltage and current).</p>
+
+        <h2>PRIOR CONCEPTS</h2>
+        <p>Basics of semiconductors, resistivity, and energy band gap.</p>
+
+        <h2>THEORY</h2>
+        
+        <h3>Ohm’s Law:</h3>
+        <p>If physical conditions remains unchanged , then potential difference across two ens is proportional to current flowing through
+it.</p>
+        <p class="formula">V = IR</p>
+    
+
+        <h3>Resistivity (ρ):</h3>
+        <p>It is the intrinsic property of a material that determines how much it resists current flow. The formula for resistivity is:</p>
+        <p class="formula">ρ = (R × A) / L</p> 
+        <p>Unit of resistivity is ohm-meter</p>
+
+        <h3>FOUR PROBE METHOD</h3>
+        <p>The Four Probe Method is a widely used technique for measuring the resistivity of semiconductors.</p>
+
+        <h2>FOUR PROBE METHOD SETUP</h2>
+        <p>The four-point probe setup consists of four equally spaced tungsten metal tips with finite radius. Each tip is supported by srpings on the end to minimize sample damage during probing. A high impedance current source is used to supply current through the outer two probes, a voltmeter measures the voltage across the inner two probes to determine the sample resistivity. Typical probe spacing is ~2mm.These inner probes draw no current due to the high input impedance voltmeter in the circuit. Thus unwanted voltage drop caused by the contact resistance between probes and the sample is eliminated from the potential measurements. </p>
+        <img src="four_probesetup.png" alt="Four Probe Method Setup">
+        
+        <p>The thickness and resistivity of the material are computed using the following formulas:</p>
+        <p class="formula">ρ = ρ(0) / f(w/S)</p>
+        <p class="formula">ρ(0) = (V/I) × 2πS</p>
+        <p class="formula">f(w/S) = 2S/w</p>
+
+        <h2>PROCEDURE</h2>
+        <ol>
+            <li>Select the semiconductor material.</li>
+            <li>Select the source current.</li>
+            <li>Select the oven range.</li>
+            <li>Set the temperature.</li>
+            <li>Select the voltmeter range.</li>
+            <li>Measure the voltage.</li>
+            <li>Calculate resistivity using:</li>
+            <ul>
+                <li class="formula">ρ = ρ(0) / f(w/S)</li>
+                <li class="formula">ρ(0) = (V/I) × 2πS</li>
+                <li class="formula">f(w/S) = 2S/w</li>
+            </ul>
+            <li>Plot resistivity vs. temperature.</li>
+            <li>Calculate the energy band gap using:</li>
+            <ul>
+                <li class="formula">Eg = 2 × KB × slope of the graph</li>
+                <li>where <span class="formula">KB = 8.6 × 10⁻⁵ eV/K</span></li>
+            </ul>
+        </ol>
+
+        <div class="button-container">
+            <button onclick="window.location.href='experiment_list.html'">Go to Experiment List</button>
+            <button onclick="window.location.href='four_probe_calc_.html';">Go to Experiment Analysis</button>
+        </div>
+
+    </section>
+
+</body>
+</html>

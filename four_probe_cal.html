@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Four Probe Method 2</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/regression@2.0.1/dist/regression.min.js"></script>
+  <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: url('bg1.png') no-repeat center center fixed;
+        background-size: cover;
+        margin: 20px;
+
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 900px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .table-container {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+    thead th {
+      position: sticky;
+      top: 0;
+      background-color: #3498db;
+      color: white;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    canvas {
+      margin-top: 20px;
+    }
+    input, select {
+      margin: 5px;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Four Probe Method 2</h1>
+
+    <div class="experiment-details">
+      <h3>Aim:</h3>
+      <p>To determine the energy band gap of a semiconductor (Germanium) using the Four Probe Method.</p>
+
+      <h3>Apparatus:</h3>
+      <ul>
+        <li>Four probe apparatus</li>
+        <li>Germanium sample</li>
+        <li>Oven</li>
+        <li>Thermometer</li>
+        <li>Voltmeter</li>
+        <li>Current Source</li>
+      </ul>
+
+      <h3>Experiment Constants:</h3>
+      <p><strong>Thickness of Ge chip (w):</strong> 0.50 mm</p>
+      <p><strong>Probe distance (S):</strong> 0.2 cm</p>
+      <p><strong>f(w/S):</strong> 5.89</p>
+    </div>
+
+    <div class="current-section">
+      <h3>Set Constant Current:</h3>
+      <label for="current">Current:</label>
+      <input type="number" id="current" required>
+      <select id="currentUnit">
+        <option value="mA">mA</option>
+        <option value="A">A</option>
+      </select>
+      <button type="button" id="setCurrentBtn">Set Current</button>
+    </div>
+
+    <form id="inputForm" style="display:none;">
+      <h3>Add Observations</h3>
+      <label for="celsiusTemperature">Temperature (°C):</label>
+      <input type="number" id="celsiusTemperature" value="30" step="5" required readonly>
+      <label for="kelvinTemperature">Temperature (K):</label>
+      <input type="number" id="kelvinTemperature" required>
+      <label for="voltage">Voltage (mV):</label>
+      <input type="number" id="voltage" required>
+      <button type="submit">Add Row</button>
+    </form>
+
+    <div class="table-container">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Temperature (°C)</th>
+            <th>Temperature (K)</th>
+            <th>1/T (1/K)</th>
+            <th>Voltage (mV)</th>
+            <th>Resistivity ρ(0)</th>
+            <th>Resistivity ρ</th>
+            <th>log<sub>10</sub>(ρ)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <canvas id="graph"></canvas>
+
+    <div class="formula-section">
+      <h3>Energy Band Gap Calculation:</h3>
+      <p id="slopeValue"><strong>Slope:</strong> --</p>
+      <p><strong>Formula:</strong> Eg = 2.303 × 2 × K<sub>B</sub> × slope × 10⁻³ (eV)</p>
+      <p id="EgValue"><strong>Eg:</strong> -- eV</p>
+    </div>
+
+    <div class="result-section" style="margin-top: 20px;">
+      <h2>Result:</h2>
+      <p>The resistivity of the given Germanium semiconductor was calculated at various temperatures using the Four Probe Method. From the graph of log(ρ) vs 1/T, the slope was determined.
+      <p id="resultEgLine"><strong>The calculated energy band gap (Eg) is: -- eV</strong></p>
+    </div>
+
+    <div style="margin-top: 20px; text-align: center;">
+      <button onclick="window.location.href='index.html'">Go to Experiment list</button>
+      <button onclick="window.location.href='four_probe_info_.html'">Go to Experiment Info</button>
+      <button onclick="window.print()">Print Result</button>
+    </div>
+  </div>
+
+  <script>
+    let current = null;
+    let currentUnit = "A";
+    let chart = null;
+    const KB = 8.6e-5;
+    let nextCelsius = 30;
+
+    document.getElementById("setCurrentBtn").addEventListener("click", function () {
+      let inputVal = parseFloat(document.getElementById("current").value);
+      currentUnit = document.getElementById("currentUnit").value;
+
+      if (!inputVal || inputVal <= 0) {
+        alert("Please enter a valid current value.");
+        return;
+      }
+
+      current = currentUnit === "mA" ? inputVal / 1000 : inputVal;
+      document.getElementById("inputForm").style.display = "block";
+      alert(`Current set to ${inputVal} ${currentUnit}`);
+    });
+
+    document.getElementById("inputForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      let tempC = nextCelsius;
+      let tempK = parseFloat(document.getElementById("kelvinTemperature").value);
+      let voltage = parseFloat(document.getElementById("voltage").value) / 1000; // Convert mV to V
+
+      if (isNaN(tempK) || isNaN(voltage) || tempK <= 0 || voltage <= 0) {
+        alert("Please enter valid temperature and voltage.");
+        return;
+      }
+
+      let inverseT = 1 / tempK;
+      let rho0 = ((voltage / current) * 2 * Math.PI * 0.2);
+      let rho = rho0 / 5.89;
+      let logRho = Math.log10(rho);
+
+      let table = document.getElementById("dataTable").getElementsByTagName("tbody")[0];
+      let newRow = table.insertRow();
+      newRow.innerHTML = `<td>${tempC}</td>
+                          <td>${tempK}</td>
+                          <td>${inverseT.toFixed(6)}</td>
+                          <td>${(voltage * 1000).toFixed(2)}</td>
+                          <td>${(rho0 / 1000).toFixed(4)}</td>
+                          <td>${(rho / 1000).toFixed(4)}</td>
+                          <td>${logRho.toFixed(6)}</td>`;
+
+      nextCelsius += 5;
+      document.getElementById("celsiusTemperature").value = nextCelsius;
+      document.getElementById("kelvinTemperature").value = "";
+      document.getElementById("voltage").value = "";
+
+      updateGraphAndCalculateEg();
+    });
+
+    function saveToLocalStorage(slope, Eg) {
+      localStorage.setItem("observationTable", document.querySelector("#dataTable tbody").innerHTML);
+      localStorage.setItem("slope", slope.toFixed(4));
+      localStorage.setItem("Eg", Eg.toFixed(4));
+
+      const graphCanvas = document.getElementById("graph");
+      const graphImage = graphCanvas.toDataURL("image/png");
+      localStorage.setItem("graphImage", graphImage);
+    }
+
+    function updateGraphAndCalculateEg() {
+      let rows = document.querySelectorAll("#dataTable tbody tr");
+      let xValues = [], yValues = [];
+
+      rows.forEach(row => {
+        let cells = row.querySelectorAll("td");
+        xValues.push(parseFloat(cells[2].innerText)); // 1/T
+        yValues.push(parseFloat(cells[6].innerText)); // log(ρ)
+      });
+
+      if (chart) chart.destroy();
+      let ctx = document.getElementById("graph").getContext("2d");
+      chart = new Chart(ctx, {
+        type: "scatter",
+        data: {
+          datasets: [{
+            label: "log(ρ) vs. 1/T",
+            data: xValues.map((x, i) => ({ x, y: yValues[i] })),
+            borderColor: "#2980b9",
+            backgroundColor: "#3498db",
+            pointRadius: 5,
+            showLine: true,
+            fill: false
+          }]
+        }
+      });
+
+      if (xValues.length >= 2) {
+        let data = xValues.map((x, i) => [x, yValues[i]]);
+        let result = regression.linear(data);
+        let slope = result.equation[0];
+
+        let Eg = 2.303 * 2 * KB * slope * 1e2;
+        Eg = Eg / 100;
+
+        document.getElementById("slopeValue").innerHTML = `<strong>Slope:</strong> ${slope.toFixed(4)}`;
+        document.getElementById("EgValue").innerHTML = `<strong>Eg:</strong> ${Eg.toFixed(4)} eV`;
+        document.getElementById("resultEgLine").innerHTML = `<strong>The calculated energy band gap (Eg) is: ${Eg.toFixed(4)} eV</strong>`;
+
+        saveToLocalStorage(slope, Eg);
+      }
+    }
+  </script>
+</body>
+</html>
+
