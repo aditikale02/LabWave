@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Experiment Data Analysis</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('bg1.png') no-repeat center center fixed;
+      background-size: cover;
+      text-align: center;
+      margin: 20px;
+      background-color: #f4f4f9;
+    }
+
+    .container {
+      width: 80%;
+      margin: auto;
+    }
+
+    h1 {
+      color: black;
+      font-size: 60px;
+      font-weight: bold;
+      text-align: center;
+      font-family: 'Raleway', sans-serif;
+      text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      color: #33007f;
+      font-size: 28px;
+      text-transform: uppercase;
+      padding-bottom: 5px;
+    }
+
+    h3 {
+      color: #060508;
+      font-size: 20px;
+      padding-bottom: 5px;
+      text-align: left;
+    }
+
+    p, ol {
+      font-size: 20px;
+      color: #333;
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      page-break-inside: avoid;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #2a0483;
+      color: white;
+    }
+
+    button {
+      background: #2e0e6a;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #5207b3;
+    }
+
+    input, select {
+      padding: 8px;
+      margin: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #calc-content {
+      text-align: left;
+      font-size: 18px;
+      color: #111;
+    }
+
+    #calc-values {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #2a0483;
+    }
+
+    @media print {
+      body {
+        background: white !important;
+      }
+
+      button, input, select {
+        display: none !important;
+      }
+
+      .card, .container {
+        box-shadow: none !important;
+        page-break-inside: avoid !important;
+      }
+
+      table {
+        page-break-inside: avoid !important;
+      }
+
+      h1 {
+        font-size: 40px !important;
+        text-shadow: none !important;
+      }
+
+      .card h3 {
+        text-align: left !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>EXPERIMENT NO. 8 - LASER</h2>
+
+    <div class="card">
+      <p><strong>Aim:</strong> To determine the grating element by using the diffraction pattern of He-Ne Laser.</p>
+      <p><strong>Apparatus:</strong> He-Ne Laser, grating, single slit, screen, scale etc.</p>
+      <p><strong>Prior Concepts:</strong> Laser, Diffraction, Diffraction grating.</p>
+    </div>
+
+    <div class="card">
+      <h3>Observations:</h3>
+      <br><label for="grating-element">Grating element (a+b) = 1cm/N =</label><br>
+      <input type="number" id="grating-element" value="0.001">
+      <br><label for="wavelength">Wavelength of Laser λ = 6328Å =</label></br>
+      <input type="number" id="wavelength" value="6.328e-5">
+      <br><label for="distance">Distance between source and screen (F, in cm) =</label></br>
+      <input type="number" id="distance" value="95">
+    </div>
+
+    <div class="card">
+      <h3>Observation Table:</h3>
+      <table>
+        <tr>
+          <th>Order of Diffraction (n)</th>
+          <th>Distance from center (LEFT, cm)</th>
+          <th>Distance from center (RIGHT, cm)</th>
+          <th>Average distance (x)</th>
+          <th>Distance F (cm)</th>
+          <th>θ = x/f × 180/π</th>
+          <th>sinθ</th>
+        </tr>
+        <tbody id="data-table"></tbody>
+      </table>
+      <button onclick="addRow()">Add Row</button>
+      <button onclick="calculate()">Calculate</button>
+    </div>
+
+    <div class="card">
+      <h3>Calculations:</h3>
+      <div id="calc-content">
+        <p>The formula used is: <strong>(a + b) = (F / x) × nλ</strong></p>
+        <p>Then, Number of lines per cm, <strong>N = 1 / (a + b)</strong></p>
+        <div id="calc-values">
+          Average (a + b) from above data: <span id="avg-ab"></span> cm<br>
+          Hence, Number of lines per cm = <span id="calc-n"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Result:</h3>
+      <p>The number of lines per cm of the diffraction grating is found to be <span id="grating-lines-final"></span>.</p>
+      <p>It can therefore be identified that the experiment was successful.</p>
+    </div>
+
+    <div class="card">
+      <button onclick="window.location.href='laser_theory.html'">Go to Info Page</button>
+      <button onclick="window.location.href='Exp_list.html'">Go to Experiment List</button>
+      <button onclick="window.print()">Print Result</button>
+    </div>
+  </div>
+
+  <script>
+    function addRow() {
+      const table = document.getElementById("data-table");
+      const row = table.insertRow();
+      row.innerHTML = `
+        <td><input type="number" class="order" placeholder="n"></td>
+        <td><input type="number" class="left" step="any" placeholder="Left (cm)"></td>
+        <td><input type="number" class="right" step="any" placeholder="Right (cm)"></td>
+        <td class="avg"></td>
+        <td class="f"></td>
+        <td class="theta"></td>
+        <td class="sintheta"></td>
+      `;
+    }
+
+    function calculate() {
+      const f = parseFloat(document.getElementById("distance").value);
+      const lambda = parseFloat(document.getElementById("wavelength").value);
+      const orders = document.querySelectorAll(".order");
+      const leftInputs = document.querySelectorAll(".left");
+      const rightInputs = document.querySelectorAll(".right");
+      const avgCells = document.querySelectorAll(".avg");
+      const fCells = document.querySelectorAll(".f");
+      const thetaCells = document.querySelectorAll(".theta");
+      const sinThetaCells = document.querySelectorAll(".sintheta");
+
+      let totalAB = 0;
+      let validRows = 0;
+
+      for (let i = 0; i < orders.length; i++) {
+        const n = parseFloat(orders[i].value);
+        const left = parseFloat(leftInputs[i].value);
+        const right = parseFloat(rightInputs[i].value);
+
+        if (!isNaN(left) && !isNaN(right) && !isNaN(n) && f > 0) {
+          const x = (Math.abs(left) + Math.abs(right)) / 2;
+          const thetaRad = x / f;
+          const thetaDeg = thetaRad * (180 / Math.PI);
+          const sinTheta = Math.sin(thetaRad);
+          const ab = (n * lambda) / sinTheta;
+
+          avgCells[i].textContent = x.toFixed(3);
+          fCells[i].textContent = f.toFixed(2);
+          thetaCells[i].textContent = thetaDeg.toFixed(3);
+          sinThetaCells[i].textContent = sinTheta.toFixed(5);
+
+          totalAB += ab;
+          validRows++;
+        } else {
+          avgCells[i].textContent = "";
+          fCells[i].textContent = "";
+          thetaCells[i].textContent = "";
+          sinThetaCells[i].textContent = "";
+        }
+      }
+
+      if (validRows > 0) {
+        const avgAB = totalAB / validRows;
+        const N = 1 / avgAB;
+        document.getElementById("grating-lines-final").textContent = Math.round(N) + " lines/cm";
+        document.getElementById("avg-ab").textContent = avgAB.toExponential(3) + " cm";
+        document.getElementById("calc-n").textContent = Math.round(N) + " lines/cm";
+      } else {
+        document.getElementById("grating-lines-final").textContent = "--";
+        document.getElementById("avg-ab").textContent = "--";
+        document.getElementById("calc-n").textContent = "--";
+      }
+    }
+  </script>
+</body>
+</html>
