@@ -88,12 +88,24 @@
 <body>
    
     <div class="container">
+        <h1>Diffraction Grating - 1</h1>
         <div class="remark">
             <strong>Note:</strong> To represent angles, we use the symbol <strong>'.'</strong> for degrees and <strong>another '.'</strong> (dots) for minutes.
         </div>
-        <h1>Observations</h1>
+          
+        <h2>Aim</h2>
+        <p><strong>1.</strong> To demonstrate the phenomenon of diffraction of light with a diffraction grating.</p>
+        <p><strong>2.</strong> To determine the wavelength of different colours of light by a diffraction grating.</p>
         
-        <h2>Grating Element Calculation</h2>
+        <h2>Apparatus</h2>
+        <p>Spectrometer, source of light (mercury lamp), diffraction grating, magnifying lenses, etc.</p>
+        
+        <h2>Prior Concepts</h2>
+        <p>Diffraction, maxima & minima of intensity.</p>
+        
+        <h2>Observations</h2>
+        
+        <h3>Grating Element Calculation</h3>
         <p><strong>N =</strong> 15000 lines per inch, <strong>1 inch =</strong> 2.54 cm</p>
         <p><strong>(a + b) =</strong> (2.54 cm) / 15000 = <input type="text"> cm</p>
         <p><strong>Least count of spectrometer =</strong> <input type="text"></p>
@@ -188,7 +200,8 @@
     </div>
 
         <div class="container">
-            <h1>Observations - Diffraction Grating</h1>
+            
+            <h2>Observations - Diffraction Grating</h2>
             
             <h2>Wavelength Calculation</h2>
             
@@ -205,6 +218,7 @@
             <input type="number" id="gratingElement" placeholder="Enter (a + b)"><br>
     
             <button onclick="calculateWavelength()">Calculate Wavelength (λ in Å)</button>
+            
     
             <div class="result" id="result"></div>
  
@@ -213,8 +227,10 @@
                    <h2>NAVIGATE</h2>
             <div class="button-container" style="margin-top: 20px;">
             
-            <a href="Exp_list.html" class="calc-button">Go to Experiment List</a>
-            <a href="diffraction_grating_info.html" class="calc-button">Go to Info Page</a>
+            <a href="Exp_list.html" class="calc-button">Experiment List</a>
+            <a href="diffractionGrating.html" class="calc-button">Analysis Page</a>
+            <button class="calc-button" onclick="window.print()">Print This Page</button>
+
             </div>
 
         </div>
