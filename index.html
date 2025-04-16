@@ -4,14 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LabWave</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="shortcut icon" href="./assets/atom.png" type="image/x-icon">
+    <link rel="stylesheet" href="try.css">
+    <link rel="shortcut icon" href="pccoelogo.png" type="image/x-icon">
+    <style>
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        #menu li a {
+            text-decoration: none;
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            color: white;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .card {
+            padding: 1em;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin: 1em;
+        }
+
+        .element {
+            text-align: center;
+        }
+
+        .tab {
+            cursor: pointer;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab.active {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
-                <h1>LabWave</h1>
+                <div class="logo">
+                    <img src="pccoelogo.png" alt="LabWave Logo" width="100" height="100">
+                    <h1>LabWave</h1>
+                </div>
                 <ul id="menu">
                     <li><a href="home.html">Home</a></li>
                     <li><a href="login.html">Login</a></li>
@@ -24,6 +110,7 @@
             </nav>
         </div>
     </header>
+
     <div class="hero">
         <video autoplay muted loop>
             <source src="homepage.mp4" type="video/mp4">
@@ -33,59 +120,28 @@
             <p>Physics beyond the classroom.</p>
         </div>
     </div>
+
+    <div id="periodicTable" class="container"></div>
+    <div id="factContainer" class="container"></div>
+
     <footer>
         <div class="container">
             <p>&copy; 2025 Physics World. All rights reserved.</p>
         </div>
     </footer>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const menuToggle = document.getElementById("menu-toggle");
             const menu = document.getElementById("menu");
-        
+
             menuToggle.addEventListener("click", () => {
                 menu.classList.toggle("show");
             });
         });
-        
     </script>
-    <!-- Script for new component -->
+
     <script>
-        const elements = [
-            { symbol: 'H', name: 'Hydrogen', number: 1, category: 'Nonmetal' },
-            { symbol: 'He', name: 'Helium', number: 2, category: 'Noble Gas' },
-            { symbol: 'Li', name: 'Lithium', number: 3, category: 'Alkali Metal' },
-            { symbol: 'Be', name: 'Beryllium', number: 4, category: 'Alkaline Earth Metal' },
-            { symbol: 'B', name: 'Boron', number: 5, category: 'Metalloid' },
-            { symbol: 'C', name: 'Carbon', number: 6, category: 'Nonmetal' },
-            { symbol: 'N', name: 'Nitrogen', number: 7, category: 'Nonmetal' },
-            { symbol: 'O', name: 'Oxygen', number: 8, category: 'Nonmetal' },
-            { symbol: 'F', name: 'Fluorine', number: 9, category: 'Halogen' },
-            { symbol: 'Ne', name: 'Neon', number: 10, category: 'Noble Gas' },
-        ];
-
-        const facts = [
-            "Water is the only natural substance found in all three states - solid, liquid, and gas - on Earth.",
-            "The most abundant element in the universe is hydrogen.",
-            "The human body contains enough carbon to make 900 pencils.",
-            "Gold is the only metal that is yellow in color.",
-            "Diamonds are the hardest natural substance on Earth."
-        ];
-
-        function createPeriodicTable() {
-            const periodicTable = document.getElementById('periodicTable');
-            elements.forEach(element => {
-                const elementDiv = document.createElement('div');
-                elementDiv.className = 'card element';
-                elementDiv.innerHTML = `
-                    <div class="element-symbol">${element.symbol}</div>
-                    <div class="element-name">${element.name}</div>
-                    <div class="element-category">${element.category}</div>
-                `;
-                periodicTable.appendChild(elementDiv);
-            });
-        }
-
         function createFactCards() {
             const factContainer = document.getElementById('factContainer');
             facts.forEach(fact => {
@@ -116,15 +172,12 @@
                 });
             });
         }
-        
-   
 
         document.addEventListener('DOMContentLoaded', () => {
             createPeriodicTable();
             createFactCards();
             setupTabs();
         });
-        
     </script>
 </body>
 </html>
