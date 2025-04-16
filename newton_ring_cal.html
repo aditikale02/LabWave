@@ -7,11 +7,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background: url('bg1.png') no-repeat center center fixed;
-            background-size: cover;
-            margin: 20px;
-
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -79,6 +74,21 @@
             margin: 10px auto;
             display: block;
         }
+        @media print {
+  .container {
+    box-shadow: none !important;
+    background: white !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .no-print, .no-print * {
+    display: none !important;
+  }
+}
+
     </style>
 </head>
 <body>
@@ -130,7 +140,9 @@
         <div class="button-container">
             <button onclick="window.location.href='Exp_list.html'">Experiment List</button>
             <button onclick="window.location.href='NewtonsRingTheory.html'">Analysis Page</button>
-            <button onclick="window.print()">Print This Page</button>
+            <div class="no-print card">
+                <button class="calc-button" onclick="window.print()">Print This Page</button>
+              </div>
         </div>
     </div>
 
