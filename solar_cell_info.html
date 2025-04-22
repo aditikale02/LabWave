@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment Information</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('bg1.png') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            margin: 20px;
+        
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        h1 {
+            color: black;
+            font-size: 60px;
+            font-weight: bold;
+            text-align: center;
+            font-family: 'Raleway', sans-serif;
+            text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            color: #33007f;
+            font-size: 28px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #240279;
+            padding-bottom: 5px;
+        }
+        p, ol {
+            font-size: 20px;
+            color: #333;
+            line-height: 1.8;
+        }
+        ol {
+            padding-left: 25px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #1c027a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background: #0056b3;
+        }
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .image-container img {
+            max-width: 60%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>EXPERIMENT NO. 10 -  SOLAR CELL -IV CHARACTRISTICS</h1>
+        <div class="card">
+            <h2>AIM - APPARATUS - PRIOR CONCEPTS</h2>
+            <p><strong>Aim:</strong> To  study the I-V characteristics of the solar cells to calculate the fill factor and value of resistance for maximum value of workable power.</p>
+            <p><strong>Apparatus:</strong>  solar cell, light source, variable load (potentiometer), milli-voltmeter, micro-ammeter, luxmeter etc.</p>
+            <p><strong>Prior Concepts:</strong> photovoltaic effect, PN junction diode, solar cell.</p>
+        </div> 
+        <div class="card">
+            <h2>THEORY</h2>
+            <p>The photovoltaic effect is the direct conversion of solar energy (sunlight) into electricity through the absorption of light in a semiconductor material, which creates electron-hole pairs. When sunlight hits the solar cell, photons transfer energy to electrons, allowing 	them to escape their atomic bonds and generate current .
+	A solar cell typically consists of:
+	1.	A semiconductor (usually silicon) that absorbs sunlight and generates electron-hole pairs.
+	2.	A drift region or electric field (formed at the p-n junction) to separate the charges.
+	3.	Front and back electrodes to collect and transmit the electric current.
+
+	In a p-n junction, electrons from the n-side and holes from the p-side diffuse across the junction, creating an electric field. This field drives the free electrons through an external circuit, producing direct current (DC).
+
+	The current continues to flow as long as the cell is exposed to sunlight. Such a cell is known as a photovoltaic (PV) cell or solar cell, and multiple cells can be combined into modules or arrays. These can also be connected to inverters to produce alternating current (AC) 	for practical use .</p>
+            <p><strong>Voc (Open-circuit Voltage):</strong> The maximum voltage when the solar cell is not connected to any load.</p>
+            <p><strong>Isc (Short-circuit Current):</strong> The maximum current when the terminals are shorted.</p>
+            <p><strong>MPP(Maximum Power Point):</strong> The  point where the cell delivers maximum power, calculated as \text{MPP} = V_{mp} \times I_{mp}.</p>
+	<p><strong>Fill Factor (FF):</strong> Indicates the quality of the solar cell, calculated as \text{FF} = \frac{V_{oc} \times I_{sc}}{V_{mp} \times I_{mp}}, typically between 0.7 and 0.8.</p>
+	<p><strong>Efficiency (η):</strong> The ratio of the maximum electrical power output to the solar energy input, usually around 10–12% depending on the cell type.</p>
+        </div>
+        <div class="image-container">
+            <img src="solarcell.jpeg" alt="solar Diagram">
+        </div>
+        <div class="card">
+            <h2>PROCEDURE</h2>
+            <ol>
+	     <li>Connect the circuit as shown in the circuit diagram and get it checked.</li>
+                <li>Start increasing the load (R) and at selected voltage steps measure current. Take maximum possible readings for graph. Take the readings up to maximum load and record in the observation table.</li>
+                <li>Calculate the values of power and resistance.</li>
+                <li>Plot the graph of, I Vs V. Draw a smooth curve from the points plotted. Extend the curve up to the X and the Y axes as per the nature of the curve. We get the points (inc, Voc). Draw a line joining origin (0, 0) and the point (Isc, Voc). This line cuts the graph at 		point (Im, Vm). Draw perpendiculars from point (Im, Vm) on X and Y axesWe get the points Im and Vm.</li>
+                <li> Draw perpendicular from Isc and Voc, we get a point. (Isc, Voc). Draw a line joining origin (0, 0) and the point (Isc, Voc). This line cuts the graph at point (Im, Vm). Draw perpendiculars from point (Im, Vm) on X and Y axes.We get the points Im and Vm.</li>
+                <li>Record Im, Vm, Isc and Voc from the graph in the observations.</li>
+                <li> Plot the graph of P Vs R and record the value of resistance for maximum workable power.<sub>10</sub>(R) vs 1/T.</li>
+                <li>Find the slope and calculate β.</li>
+                <li>Determine the energy gap, E<sub>g</sub> using E<sub>g</sub> = 2k<sub>B</sub>β.</li>
+            </ol>
+        </div>
+        <div class="card">
+            <h2>NAVIGATE</h2>
+            <a href="bandgap_cal.html">Go to Experiment Analysis</a>
+            <a href="Exp_list.html" style="margin-left: 10px;">Go to Experiment list</a>
+        </div>
+    </div>
+</body>
+</html>
