@@ -9,11 +9,38 @@
 </head>
 <body>
     <h1>Polarization Experiment: Malus's Law</h1>
+
+    <div class="container">
+        <h2>Aim</h2>
+        <p>To verify the cosine square law of Malus for plane polarized light.</p>
+
+        <h2>Apparatus</h2>
+        <ul>
+            <li>Lamp</li>
+            <li>Two polaroids</li>
+            <li>Photocell</li>
+            <li>Micro-ammeter</li>
+        </ul>
+        <p><strong>Prior Concepts:</strong><br>
+        Refraction<br>
+        Polarization<br>
+        Polaroid<br>
+        Photo sensor</p>
+
+        <h2>Theory</h2>
+        <p>Malus's Law states that the intensity of polarized light passing through an analyzer varies as the square of the cosine of the angle between the light’s initial polarization direction and the axis of the analyzer. Mathematically, it is given by:</p>
+        <p><strong>I = I<sub>max</sub> cos²θ</strong></p>
+        <p>Where:<br>
+        I is the transmitted intensity,<br>
+        I<sub>max</sub> is the maximum intensity, and<br>
+        θ is the angle between the light’s initial polarization direction and the axis of the analyzer.</p>
+    </div>
+
     <div class="container">
         <p>This experiment records the variation of intensity with respect to angular position.</p>
         <button onclick="addRow()">Add Row</button>
         <button onclick="calculateResults()">Calculate Results</button>
-        
+
         <table>
             <thead>
                 <tr>
@@ -33,18 +60,19 @@
         <h2>Graph</h2>
         <canvas id="intensityChart" width="400" height="200"></canvas>
     </div>
-    
+
     <div class="button-container">
         <button onclick="goToExperimentList()">Go to Experiment List</button>
         <button onclick="goToExperimentInfo()">Go to Experiment Analysis</button>
         <button onclick="printResults()">Print Results</button>
     </div>
-    
+
     <script>
         let maxIntensity = null;
         let tableBody = document.getElementById("table-body");
         let angleStep = 10;
         let rowCount = 0;
+        let chartInstance = null;
 
         function addRow() {
             let angle = rowCount * angleStep;
@@ -52,7 +80,7 @@
             row.innerHTML = `
                 <td>${angle}</td>
                 <td>${angle}</td>
-                <td><input type="number" class="reading" data-index="${rowCount}" oninput="validateInput(this)"></td>
+                <td><input type="number" class="reading" data-index="${rowCount}" oninput="validateInput(this)" placeholder="I (μA)"></td>
                 <td class="iimax">-</td>
                 <td class="cos2theta">-</td>
             `;
@@ -78,7 +106,7 @@
             maxIntensity = firstValue;
 
             let angles = [], intensities = [];
-            
+
             readings.forEach((input, index) => {
                 let value = parseFloat(input.value);
                 if (!isNaN(value) && maxIntensity !== 0) {
@@ -86,10 +114,10 @@
                     let cos2thetaCell = iimaxCell.nextElementSibling;
                     let ratio = value / maxIntensity;
                     iimaxCell.textContent = ratio.toFixed(3);
-                    
+
                     let angle = index * angleStep;
                     cos2thetaCell.textContent = (Math.cos(angle * Math.PI / 180) ** 2).toFixed(3);
-                    
+
                     angles.push(angle);
                     intensities.push(ratio);
                 }
@@ -99,7 +127,10 @@
 
         function drawGraph(angles, intensities) {
             let ctx = document.getElementById('intensityChart').getContext('2d');
-            new Chart(ctx, {
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            chartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: angles,
@@ -131,6 +162,11 @@
         function printResults() {
             window.print();
         }
+
+        // Optional: Add default rows on load
+        window.onload = () => {
+            for (let i = 0; i < 10; i++) addRow();
+        };
     </script>
 </body>
 </html>
