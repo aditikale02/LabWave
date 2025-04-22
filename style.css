@@ -6,11 +6,31 @@
             text-align: center;
             margin: 20px;
             background-color: #f4f4f9;
+            line-height: 1.6;
         
         }
         .container {
             width: 80%;
             margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .content {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .formula {
+            font-weight: bold;
+            background: #eef;
+            padding: 5px;
+            display: inline-block;
+            border-radius: 5px;
         }
         .card {
             background: white;
@@ -20,6 +40,16 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             text-align: left;
         }
+        .graph-container {
+            width: 600px;
+            height: 450px;
+            border: 1px solid #ddd;
+            margin: auto;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
         h1 {
             color: black;
             font-size: 60px;
@@ -27,6 +57,9 @@
             text-align: center;
             font-family: 'Raleway', sans-serif;
             text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
         }
         h2 {
             color: #33007f;
@@ -34,14 +67,29 @@
             text-transform: uppercase;
             border-bottom: 2px solid #240279;
             padding-bottom: 5px;
+            margin-top: 20px;
+        }
+        h3 {
+            color: #060508;
+            font-size: 20px;
+            padding-bottom: 5px;
+            text-align: left;
+        }
+        p, li {
+            line-height: 1.6;
+            margin-bottom: 15px;
         }
         p, ol {
             font-size: 20px;
             color: #333;
             line-height: 1.8;
-        }
-        ol {
+            text-align: left;
             padding-left: 25px;
+            margin-top: 10px;
+            line-height: 1.6;
+        } 
+        p strong {
+            color: #d9534f;
         }
         a {
             display: inline-block;
@@ -55,6 +103,12 @@
         a:hover {
             background: #0056b3;
         }
+        img {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+            border: 2px solid #ccc;
+        }
         .image-container {
             text-align: center;
             margin: 30px 0;
@@ -65,19 +119,93 @@
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
+        button{
+            margin-top: 10px; 
+            padding: 10px; 
+            cursor: pointer; 
+            background-color: #4682B4; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            display: block;
+            margin: 20px auto;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-container button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button-container button:hover {
+            background-color: darkblue;
+        }
         table {
           width: 100%;
           table-layout: fixed;
           border-collapse: collapse;
+          margin: 20px 0;
         }
         th, td {
           width: 10%;
           text-align: center;
           vertical-align: middle;
+          border: 1px solid #ddd;
+          padding: 10px;
         }
         input[type="number"] {
           width: 100%;
           box-sizing: border-box;
           padding: 4px;
           text-align: center;
+        }
+        .calc-button {
+            display: block;
+            width: 250px;
+            margin: 20px auto;
+            text-align: center;
+            background: #0e0158;
+            color: white;
+            padding: 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        .calc-button:hover {
+            background: #0e0158;
+        }
+        .navigation {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .nav-button {
+            display: inline-block;
+            background: #0e0158;
+            color: white;
+            padding: 12px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: 0.3s;
+        }
+        .nav-button:hover {
+            background: #370d80;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;  text-align: justify; 
+        }
+        .procedure {
+            background: #e9f7ff;
+            padding: 15px;
+            border-left: 5px solid #0e0158;
+            margin: 10px 0;
         }
