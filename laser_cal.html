@@ -5,142 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Experiment Data Analysis</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: url('bg1.png') no-repeat center center fixed;
-      background-size: cover;
-      text-align: center;
-      margin: 20px;
-      background-color: #f4f4f9;
-    }
-
-    .container {
-      width: 80%;
-      margin: auto;
-    }
-
-    h1 {
-      color: black;
-      font-size: 60px;
-      font-weight: bold;
-      text-align: center;
-      font-family: 'Raleway', sans-serif;
-      text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
-    }
-
-    h2 {
-      color: #33007f;
-      font-size: 28px;
-      text-transform: uppercase;
-      padding-bottom: 5px;
-    }
-
-    h3 {
-      color: #060508;
-      font-size: 20px;
-      padding-bottom: 5px;
-      text-align: left;
-    }
-
-    p, ol {
-      font-size: 20px;
-      color: #333;
-      line-height: 1.8;
-      text-align: left;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      margin: 20px 0;
-      border-radius: 10px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      page-break-inside: avoid;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-    }
-
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: center;
-    }
-
-    th {
-      background-color: #2a0483;
-      color: white;
-    }
-
-    button {
-      background: #2e0e6a;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      margin: 10px;
-      cursor: pointer;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-
-    button:hover {
-      background: #5207b3;
-    }
-
-    input, select {
-      padding: 8px;
-      margin: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    #calc-content {
-      text-align: left;
-      font-size: 18px;
-      color: #111;
-    }
-
-    #calc-values {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #2a0483;
-    }
-
-    @media print {
-      body {
-        background: white !important;
-      }
-
-      button, input, select {
-        display: none !important;
-      }
-
-      .card, .container {
-        box-shadow: none !important;
-        page-break-inside: avoid !important;
-      }
-
-      table {
-        page-break-inside: avoid !important;
-      }
-
-      h1 {
-        font-size: 40px !important;
-        text-shadow: none !important;
-      }
-
-      .card h3 {
-        text-align: left !important;
-      }
-    }
-  </style>
+  
+  <link rel="stylesheet" href="stylecal.css">
 </head>
 <body>
-  <div class="container">
+  <div class="card" text-align="center">
     <h2>EXPERIMENT NO. 8 - LASER</h2>
 
     <div class="card">
@@ -152,7 +21,7 @@
     <div class="card">
       <h3>Observations:</h3>
       <br><label for="grating-element">Grating element (a+b) = 1cm/N =</label><br>
-      <input type="number" id="grating-element" value="0.001">
+      <input type="number" id="grating-element" value="0.000994">
       <br><label for="wavelength">Wavelength of Laser λ = 6328Å =</label></br>
       <input type="number" id="wavelength" value="6.328e-5">
       <br><label for="distance">Distance between source and screen (F, in cm) =</label></br>
@@ -163,13 +32,13 @@
       <h3>Observation Table:</h3>
       <table>
         <tr>
-          <th>Order of Diffraction (n)</th>
-          <th>Distance from center (LEFT, cm)</th>
-          <th>Distance from center (RIGHT, cm)</th>
-          <th>Average distance (x)</th>
-          <th>Distance F (cm)</th>
-          <th>θ = x/f × 180/π</th>
-          <th>sinθ</th>
+          <th width="10%">Order of Diffraction (n)</th>
+          <th width="10%">Distance from center (LEFT, cm)</th>
+          <th width="10%">Distance from center (RIGHT, cm)</th>
+          <th width="10%">Average distance (x)</th>
+          <th width="10%">Distance F (cm)</th>
+          <th width="10%">θ = x/f × 180/π</th>
+          <th width="10%">sinθ</th>
         </tr>
         <tbody id="data-table"></tbody>
       </table>
@@ -196,7 +65,7 @@
     </div>
 
     <div class="card">
-      <button onclick="window.location.href='laser_theory.html'">Go to Info Page</button>
+      <button onclick="window.location.href='laser_info.html'">Go to Info Page</button>
       <button onclick="window.location.href='Exp_list.html'">Go to Experiment List</button>
       <button onclick="window.print()">Print Result</button>
     </div>
@@ -207,13 +76,13 @@
       const table = document.getElementById("data-table");
       const row = table.insertRow();
       row.innerHTML = `
-        <td><input type="number" class="order" placeholder="n"></td>
-        <td><input type="number" class="left" step="any" placeholder="Left (cm)"></td>
-        <td><input type="number" class="right" step="any" placeholder="Right (cm)"></td>
-        <td class="avg"></td>
-        <td class="f"></td>
-        <td class="theta"></td>
-        <td class="sintheta"></td>
+        <td><input type="number" class="order" placeholder="n" width="10%"></td>
+        <td><input type="number" class="left" step="any" placeholder="Left (cm)" width="10%"></td>
+        <td><input type="number" class="right" step="any" placeholder="Right (cm)" width="10%"></td>
+        <td class="avg" width="10%"></td>
+        <td class="f" width="10%"></td>
+        <td class="theta" width="10%"></td>
+        <td class="sintheta" width="10%"></td>
       `;
     }
 

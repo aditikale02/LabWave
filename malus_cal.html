@@ -5,26 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experiment Observation</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body { font-family: 'Poppins', sans-serif;
-        background: url('bg1.png') no-repeat center center fixed;
-        background-size: cover;
-        margin: 20px;
-        font-family: Arial, sans-serif; margin: 20px; text-align: center; }
-        .card { background: #f9f9f9; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); max-width: 800px; margin: auto; margin-bottom: 20px; text-align: left; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid black; padding: 8px; text-align: center; }
-        th { background-color: #4682B4; color: white; }
-        input { width: 80px; text-align: center; }
-        button { margin-top: 10px; padding: 10px; cursor: pointer; background-color: #4682B4; color: white; border: none; border-radius: 5px; }
-        .button-container { margin-top: 20px; text-align: center; }
-        canvas { margin-top: 20px; }
-        h1 { font-size: 32px; font-weight: bold; text-align: center; margin-bottom: 20px; }
-    </style>
+    <link rel="stylesheet" href="stylecal.css">
 </head>
 <body>
     <h1>Polarization Experiment: Malus's Law</h1>
-    <div class="card">
+    <div class="container">
         <p>This experiment records the variation of intensity with respect to angular position.</p>
         <button onclick="addRow()">Add Row</button>
         <button onclick="calculateResults()">Calculate Results</button>
@@ -44,7 +29,7 @@
         </table>
     </div>
 
-    <div class="card">
+    <div class="container">
         <h2>Graph</h2>
         <canvas id="intensityChart" width="400" height="200"></canvas>
     </div>

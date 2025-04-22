@@ -21,6 +21,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 90%;
     max-width: 900px;
+    margin-bottom: 20px;
 }
 
 .table-container {
@@ -40,6 +41,7 @@ h2 {
     color: #33007f;
     font-size: 28px;
     padding-bottom: 5px;
+    border-bottom: 2px solid #240279;
 }
 
 h3 {
@@ -47,6 +49,7 @@ h3 {
     font-size: 20px;
     padding-bottom: 5px;
     text-align: left;
+    border-bottom: 2px solid #240279;
 }
 
 p,
@@ -81,7 +84,6 @@ td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
-    padding: 12px;
 }
 
 thead th {

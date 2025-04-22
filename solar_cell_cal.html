@@ -5,58 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solar Cell Experiment</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            font-size: 20px;
-            background-color: #f4f4f4;
-        }
-
-        .card {
-            background: white;
-            padding: 20px;
-            margin: 20px auto;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            max-width: 800px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th, td {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: center;
-            font-size: 20px;
-        }
-
-        button {
-            background-color: blue;
-            color: white;
-            border: none;
-            padding: 12px 18px;
-            margin: 5px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: darkblue;
-        }
-
-        .title {
-            text-align: center;
-            font-size: 40px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: darkblue;
-        }
-    </style>
+    <link rel="stylesheet" href="stylecal.css">
 </head>
 <body>
     <div class="container">
@@ -67,7 +16,7 @@
             <p><strong>Prior Concepts:</strong> photovoltaic effect, PN junction diode, solar cell.</p>
         </div> 
     </div>
-<div class="card">
+<div class="container">
     <p style="font-size: 22px; color: darkred;">Incident light on solar cell: <b>18.644 kW/m²</b></p>
     <h3 style="font-size: 24px;">Observation Table</h3>
     <table>
@@ -84,16 +33,16 @@
     <button onclick="calculateValues()">Calculate Power & Resistance</button>
 </div>
 
-<div class="card">
+<div class="container">
     <h3 style="font-size: 24px;">Graph: Voltage vs Current</h3>
     <canvas id="voltageCurrentChart"></canvas>
 </div>
 
-<div class="card">
+<div class="container">
     <h3 style="font-size: 24px;">Graph: Power vs Resistance</h3>
     <canvas id="powerResistanceChart"></canvas>
 </div>
-<div class="card">
+<div class="container">
     <button onclick="window.location.href='solar_cell_info.html'">Go to Info Page</button>
     <button onclick="window.location.href='Exp_list.html'">Go to Experiment list</button>
     <button onclick="window.print()">Print Result</button>
