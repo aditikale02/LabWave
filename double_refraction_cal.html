@@ -3,90 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <title>Double Refraction Result</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="1.css">
+  
 </head>
 <body>
+  <div class="container">
+    <h1>Experiment No. 7: Double Refraction (Birefringence)</h1>
+    <p><strong>Aim:</strong> To determine the refractive index of ordinary and extra-ordinary rays and identification of types of crystal using the double refraction phenomenon.</p>
+    <p><strong>Apparatus:</strong> Spectrometer, source of light (sodium light), quartz prism & polarizer attachments to the telescope.</p>
+    <p><strong>Prior Concepts:</strong> Refraction, double refraction, polarization, Snell's law of refraction.</p>
+
+    <label for="anglePrism">Angle of Prism A (°):</label>
+    <input type="number" id="anglePrism" value="60"><br><br>
+
     <div class="container">
-      <h1>Experiment No. 7: Double Refraction (Birefringence)</h1>
-      <div class="card">
-          <h2>AIM - APPARATUS - PRIOR CONCEPTS</h2>
-          <p><strong>Aim:</strong>To determine the refractive index of ordinary and extra-ordinary rays and identification of types of crystal using the double refraction phenomenon.</p>
-          <p><strong>Apparatus:</strong> Spectrometer, source of light (sodium light), quartz prism & polarizer attachments to the telescope.</p>
-          <p><strong>Prior Concepts:</strong> Refraction, double refraction, polarization, Snell's law of refraction.</p>
-      </div>
-      
-    
-    <table>
-      <thead>
-        <tr>
-          <th>Q1 (°)</th>
-          <th>Q1 (′)</th>
-          <th>Q2 (°)</th>
-          <th>Q2 (′)</th>
-          <th>Q3 (°)</th>
-          <th>Q3 (′)</th>
-          <th>|Q1 − Q2| (° ′)</th>
-          <th>|Q1 − Q3| (° ′)</th>
-        </tr>
-      </thead>
-      <tbody id="data-table">
-        <tr>
-          <td><input type="number" class="q1-deg" onclick="angleQ1()" /></td>
-          <td><input type="number" class="q1-min" onclick="angleQ1()" /></td>
-          <td><input type="number" class="q2-deg" onclick="angleQ1()" /></td>
-          <td><input type="number" class="q2-min" onclick="angleQ1()" /></td>
-          <td><input type="number" class="q3-deg" onclick="angleQ1()" /></td>
-          <td><input type="number" class="q3-min" /></td>
-          <td class="diff12-dm"></td>
-          <td class="diff13-dm"></td>
-        </tr>
-      </tbody>
-    </table>
-    
+      <table>
+        <thead>
+          <tr>
+            <th>Direct Slit (°)</th>
+            <th>Direct Slit (′)</th>
+            <th>O-Image (°)</th>
+            <th>O-Image (′)</th>
+            <th>E-Image (°)</th>
+            <th>E-Image (′)</th>
+            <th>|Direct - O| (°)</th>
+            <th>|Direct - E| (°)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="number" id="q1Deg"></td>
+            <td><input type="number" id="q1Min"></td>
+            <td><input type="number" id="q2Deg"></td>
+            <td><input type="number" id="q2Min"></td>
+            <td><input type="number" id="q3Deg"></td>
+            <td><input type="number" id="q3Min"></td>
+            <td><input type="text" id="diffO" readonly></td>
+            <td><input type="text" id="diffE" readonly></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <button onclick="calculateDifferences()">Calculate</button>
-    <h2>Result:</h2>
-    <p>As per the calculations, the result shows following conditions:</p>
-    <p> Crystal is positive</p>
+    <button onclick="calculateRefractiveIndices()">Calculate</button>
+
+    <div class="result-section">
+      <h2>Result:</h2>
+      <p id="resultPara"></p>
+      <p class="formula">Refractive index formula: n = sin((A + δm) / 2) / sin(A / 2)</p>
+      <p id="nOrdinary"></p>
+      <p id="nExtraordinary"></p>
+    </div>
   </div>
-<div class="container">
-            <h2>NAVIGATE</h2>
-            <button onclick="window.location.href='double_refraction_info.html'">Go to Info Page</button>
-            <button onclick="window.location.href='Exp_list.html'">Go to Experiment list </button>
-            <button onclick="window.print()">Print Result</button>
-        </div>
+
+  <div class="container">
+    <h2>NAVIGATE</h2>
+    <div class="nav-buttons">
+      <button onclick="window.location.href='double_refraction_info.html'">Go to Info Page</button>
+      <button onclick="window.location.href='Exp_list.html'">Go to Experiment list</button>
+      <button onclick="window.print()">Print Result</button>
+    </div>
+  </div>
+
   <script>
-   function getAngleInDegrees(deg, min) {
-  return parseFloat(deg) + parseFloat(min) / 60;
-}
+    function toRadians(deg) {
+      return deg * (Math.PI / 180);
+    }
 
-function getDifferenceDegMin(deg1, min1, deg2, min2) {
-  const angle1 = getAngleInDegrees(deg1, min1);
-  const angle2 = getAngleInDegrees(deg2, min2);
-  const diffDecimal = Math.abs(angle1 - angle2);
-  const deg = Math.floor(diffDecimal);
-  const min = Math.round((diffDecimal - deg) * 60);
-  return `${deg}° ${min}′`;
-}
+    function calculateAngle(deg, min) {
+      return parseFloat(deg) + parseFloat(min) / 60;
+    }
 
-function calculateDifferences() {
-  const row = document.querySelector("#data-table tr");
+    function calculateRefractiveIndices() {
+      const angleA = parseFloat(document.getElementById('anglePrism').value);
 
-  const q1Deg = row.querySelector(".q1-deg").value;
-  const q1Min = row.querySelector(".q1-min").value;
-  const q2Deg = row.querySelector(".q2-deg").value;
-  const q2Min = row.querySelector(".q2-min").value;
-  const q3Deg = row.querySelector(".q3-deg").value;
-  const q3Min = row.querySelector(".q3-min").value;
+      const q1 = calculateAngle(document.getElementById('q1Deg').value, document.getElementById('q1Min').value);
+      const q2 = calculateAngle(document.getElementById('q2Deg').value, document.getElementById('q2Min').value);
+      const q3 = calculateAngle(document.getElementById('q3Deg').value, document.getElementById('q3Min').value);
 
-  const diff12 = getDifferenceDegMin(q1Deg, q1Min, q2Deg, q2Min);
-  const diff13 = getDifferenceDegMin(q1Deg, q1Min, q3Deg, q3Min);
+      const deltaO = Math.abs(q1 - q2);
+      const deltaE = Math.abs(q1 - q3);
 
-  row.querySelector(".diff12-dm").textContent = diff12;
-  row.querySelector(".diff13-dm").textContent = diff13;
-}
+      document.getElementById('diffO').value = deltaO.toFixed(2);
+      document.getElementById('diffE').value = deltaE.toFixed(2);
 
+      const muO = (Math.sin(toRadians((angleA + deltaO) / 2)) / Math.sin(toRadians(angleA / 2))).toFixed(4);
+      const muE = (Math.sin(toRadians((angleA + deltaE) / 2)) / Math.sin(toRadians(angleA / 2))).toFixed(4);
 
+      document.getElementById('nOrdinary').textContent = `Refractive index of Ordinary Ray (μₒ): ${muO}`;
+      document.getElementById('nExtraordinary').textContent = `Refractive index of Extraordinary Ray (μₑ): ${muE}`;
+
+      document.getElementById('resultPara').textContent = muE > muO ? "μₑ > μₒ → Positive Crystal" : "μₒ > μₑ → Negative Crystal";
+    }
   </script>
 </body>
 </html>
