@@ -3,101 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Double Refraction Result</title>
-  <style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        background: url('bg1.png') no-repeat center center fixed;
-        background-size: cover;
-        text-align: center;
-        margin: 20px;
-
-        font-family: 'Poppins', sans-serif;
-        background-color: #f4f4f9;
-        text-align: center;
-        margin: 20px;
-    }
-    .container {
-        width: 80%;
-        margin: auto;
-    }
-    h1 {
-        color: black;
-        font-size: 60px;
-        font-weight: bold;
-        text-align: center;
-        font-family: 'Raleway', sans-serif;
-        text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
-    }
-    h2 {
-        color: #33007f;
-        font-size: 28px;
-        text-transform: uppercase;
-        border-bottom: 2px solid #240279;
-        padding-bottom: 5px;
-    }
-    h3 {
-        color: #060508;
-        font-size: 20px;
-        padding-bottom: 5px;
-    }
-    .card {
-        background: white;
-        padding: 20px;
-        margin: 20px 0;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-    }
-    th, td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: center;
-    }
-    th {
-        background-color: #2a0483;
-        color: white;
-    }
-    .graph-container {
-        width: 600px;
-        height: 450px;
-        border: 1px solid #ddd;
-        margin: auto;
-        padding: 10px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    button {
-        background: #2e0e6a;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        margin: 10px;
-        cursor: pointer;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-    button:hover {
-        background: #5207b3;
-    }
-    input, select {
-        padding: 8px;
-        margin: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-</style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Experiment No. 7: Double Refraction (Birefringence)</h2>
-
-    <style>
-    </style>
+    <div class="container">
+      <h1>Experiment No. 7: Double Refraction (Birefringence)</h1>
+      <div class="card">
+          <h2>AIM - APPARATUS - PRIOR CONCEPTS</h2>
+          <p><strong>Aim:</strong>To determine the refractive index of ordinary and extra-ordinary rays and identification of types of crystal using the double refraction phenomenon.</p>
+          <p><strong>Apparatus:</strong> Spectrometer, source of light (sodium light), quartz prism & polarizer attachments to the telescope.</p>
+          <p><strong>Prior Concepts:</strong> Refraction, double refraction, polarization, Snell's law of refraction.</p>
+      </div>
+      
     
     <table>
       <thead>
@@ -128,12 +45,15 @@
     
 
     <button onclick="calculateDifferences()">Calculate</button>
-
+    <h2>Result:</h2>
+    <p>As per the calculations, the result shows following conditions:</p>
+    <p> Crystal is positive</p>
   </div>
-<div class="card">
+<div class="container">
             <h2>NAVIGATE</h2>
             <button onclick="window.location.href='double_refraction_info.html'">Go to Info Page</button>
             <button onclick="window.location.href='Exp_list.html'">Go to Experiment list </button>
+            <button onclick="window.print()">Print Result</button>
         </div>
   <script>
    function getAngleInDegrees(deg, min) {
